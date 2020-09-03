@@ -5,10 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-
+import { FooterTabModule } from '../footer-tab/footer-tab.module'
 @NgModule({
   imports: [
     CommonModule,
+    FooterTabModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild([

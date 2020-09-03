@@ -1,5 +1,7 @@
 {
   "name": "VA_io4",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
