@@ -30,6 +30,7 @@ export class HomePage {
     private storage: Storage,
     private sqlite: SQLite,
     private alertCtrl: AlertController,
+    private router:Router,
     private bckBtnSrvc: BackButtonService
   ) {
 
@@ -102,7 +103,8 @@ export class HomePage {
           data: this.user
         }
       }
-      this.navCtrl.navigateRoot(link, navParams);
+      this.router.navigate([link],navParams);
+      //this.navCtrl.navigateRoot(link, navParams);
     }
 
     else {

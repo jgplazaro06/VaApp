@@ -23,7 +23,7 @@ import { NavigationExtras, Router } from '@angular/router';
 export class AppComponent {
 	@ViewChildren(IonRouterOutlet) routerOutlet: QueryList<IonRouterOutlet>;
 
-	userQuery: string = `create table UserData(
+	userQuery: string = `create table if not exists UserData(
 		ID varchar(63),
 		Image varchar(127),
 		Name varchar(63),
@@ -35,7 +35,7 @@ export class AppComponent {
 		Keynum int
 	);`;
 
-	ambassadorQuery: string = `create table Ambassador(
+	ambassadorQuery: string = `create table if not exists Ambassador(
 		ID varchar(63),
 		title varchar(63),
 		position varchar(63),
@@ -51,7 +51,7 @@ export class AppComponent {
 		NewDescription varchar(4095)
 	);`;
 
-	corporateQuery: string = `create table Corporate(
+	corporateQuery: string = `create table if not exists Corporate(
 		ID varchar(63),
 		runningNum varchar(15),
 		Title varchar(15),
@@ -64,10 +64,10 @@ export class AppComponent {
 		Image varchar(127)
 	);`;
 
-	versionQuery: string = `create table Version(
-		id int,
-		current varchar(7)
-	);`;
+	// versionQuery: string = `create table if not exists Version(
+	// 	id int,
+	// 	current varchar(7)
+	// );`;
 
 	alertShown: boolean = false;
 	load: any;
@@ -78,7 +78,6 @@ export class AppComponent {
 
 	constructor(
 		private platform: Platform,
-		private navCtrl: NavController,
 		private router: Router,
 		statusBar: StatusBar,
 		splashScreen: SplashScreen,
@@ -140,6 +139,7 @@ export class AppComponent {
 				{ title: "Travel Requests", component: '/travel-request', accessible: false }
 			];
 
+			this.setupSqlTables();
 
 			// this.http.get('http://localhost:8080/gbd').subscribe(res => {
 			// 	console.log(res.json())
@@ -179,6 +179,19 @@ export class AppComponent {
 			// }).catch(err => console.log(err));
 		});
 	}
+	setupSqlTables(){					
+		this.sqlite.create({
+            name: "vapp.db",
+            location: "default"
+          }).then((db:SQLiteObject)=>{
+			db.executeSql(this.userQuery,[])
+			.then(()=>db.executeSql(this.ambassadorQuery,[])
+				.then(()=>db.executeSql(this.corporateQuery,[])))
+		  })
+		  .catch(err=>{
+			  console.log(err);
+		  })
+	}
 
 	presentConfirm() {
 		this.alertCtrl.create({
@@ -204,9 +217,10 @@ export class AppComponent {
 		});
 	}
 
-	goHome() {
-		this.navCtrl.navigateRoot('/home');
-	}
+	// goHome() {
+	// 	this.router.navigate(['/home']);
+	// 	//this.navCtrl.navigateRoot('/home');
+	// }
 
 	openPage(p: { title: string, component: string, accessible: boolean }) {
 		console.log(p)
@@ -216,7 +230,8 @@ export class AppComponent {
 					data: this.user
 				}
 			}
-			this.navCtrl.navigateRoot(p.component, navParams);
+			this.router.navigate([p.component]);
+			//this.navCtrl.navigateRoot(p.component, navParams);
 		}
 
 		else {
@@ -231,7 +246,8 @@ export class AppComponent {
 					data: this.user
 				}
 			}
-			this.navCtrl.navigateForward(['/profile'], navParams);
+			this.router.navigate(['/profile'], navParams);
+			//this.navCtrl.navigateForward(['/profile'], navParams);
 		}
 	}
 
@@ -356,17 +372,20 @@ export class AppComponent {
 	}
 
 	logIn() {
-		console.log("Hello")
-		this.navCtrl.navigateForward('login');
+		//console.log("Hello")
+		this.router.navigate(['/login']);
+		//this.navCtrl.navigateForward('login');
 	}
 
 	adminLogIn() {
 		console.log("Hello")
-		this.navCtrl.navigateForward('login-admin');
+		this.router.navigate(['/login-admin']);
+		//this.navCtrl.navigateForward('login-admin');
 	}
 
 	goToVotes() {
-		this.navCtrl.navigateForward('pdf-votes');
+		this.router.navigate(['/pdf-votes']);
+		//this.navCtrl.navigateForward('pdf-votes');
 
 	}
 

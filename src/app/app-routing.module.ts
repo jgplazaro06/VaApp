@@ -7,14 +7,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  },
+  // {
+  //   path: 'home',
+  //   loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  // },
+  // {
+  //   path: 'list',
+  //   loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+  // },
   { path: 'ambassador-category-holder', loadChildren: './ambassador-category-holder/ambassador-category-holder.module#AmbassadorCategoryHolderPageModule' },
   { path: 'ambassador-contact', loadChildren: './ambassador-contact/ambassador-contact.module#AmbassadorContactPageModule' },
   { path: 'ambassador-profile', loadChildren: './ambassador-profile/ambassador-profile.module#AmbassadorProfilePageModule' },
