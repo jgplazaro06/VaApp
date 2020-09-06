@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 export class AuthGuardService implements CanActivate {
 
   constructor(
-    private authSvc:AuthenticationService,
+    private authSvc: AuthenticationService,
     private alertCtrl:AlertController
     ) { }
 

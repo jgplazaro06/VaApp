@@ -13,7 +13,7 @@ import { Defaults } from './objects';
 import { Downloader } from '../models/downloader.model';
 import { async } from '@angular/core/testing';
 import { NavigationExtras, Router } from '@angular/router';
-import { AuthenticationService } from './services/Authentication.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
 	selector: 'app-root',

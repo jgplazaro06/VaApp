@@ -10,7 +10,8 @@ import { FooterTabComponent } from '../footer-tab/footer-tab.component'
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    RouterModule
   ],
   declarations: [FooterTabComponent],
   exports: [FooterTabComponent]

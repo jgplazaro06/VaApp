@@ -78,7 +78,7 @@
         <ion-button size="large" class="home-buttons default-element-color" *ngIf="!travelRequestAdmin" [routerLink] = "['/create-travel-request']" routerDirection='forward'>
           <img src="assets/imgs/icn-travel.png">
         </ion-button>
-        <ion-button size="large" class="home-buttons default-element-color" *ngIf="!travelRequestAdmin" [routerLink] = "['/travel-request']" routerDirection='forward'>
+        <ion-button size="large" class="home-buttons default-element-color" *ngIf="travelRequestAdmin" [routerLink] = "['/travel-request']" routerDirection='forward'>
           <img src="assets/imgs/icn-travel.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">TRAVEL REQUEST</p>

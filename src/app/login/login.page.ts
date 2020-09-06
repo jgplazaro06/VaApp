@@ -4,7 +4,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { LoginEvents } from '../../events/login-event';
 import { HomeEvent } from '../../events/home-event';
 import { User } from '../../models/user.model';
-import { AuthenticationService } from '../services/Authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
