@@ -23,43 +23,43 @@ export class FooterTabComponent implements OnInit {
       { title: "Travel Request", component: '/travel-request', icon: 'contacts' },
       { title: "V Ambassadors", component: '/ambassadors', icon: 'map' },
     ];
-    this.event.subscribe(LoginEvents.EVENT_CHANGE, _ => {
-      this.retrieveData();
-    });
+    // this.event.subscribe(LoginEvents.EVENT_CHANGE, _ => {
+    //   this.retrieveData();
+    // });
   }
 
   ngOnInit() { }
 
-  retrieveData() {
-    this.storage.get("user")
-      .then(val => {
-       if(val!==null){
-          this.hasAccount = true;
-       }
-       else
-        this.hasAccount = false;
-      })
-      .catch((err) => {
-        console.log(err);
-        this.hasAccount = false;
-      });
-  }
-  footerTabClick(page: string) {
-    if(this.hasAccount){
-      this.router.navigate([page]);
-    } else {
-      if(page === '/travel-request')
-        this.alertBox();
-      else
-        this.router.navigate([page]);
-    }
-  }
-  alertBox() {
-		this.alertCtrl.create({
-			subHeader: 'You need to log-in to access this page',
-			buttons: ["OK"]
-		}).then(alert => alert.present());
+  // retrieveData() {
+  //   this.storage.get("user")
+  //     .then(val => {
+  //      if(val!==null){
+  //         this.hasAccount = true;
+  //      }
+  //      else
+  //       this.hasAccount = false;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       this.hasAccount = false;
+  //     });
+  // }
+  // footerTabClick(page: string) {
+  //   if(this.hasAccount){
+  //     this.router.navigate([page]);
+  //   } else {
+  //     if(page === '/travel-request')
+  //       this.alertBox();
+  //     else
+  //       this.router.navigate([page]);
+  //   }
+  // }
+  // alertBox() {
+	// 	this.alertCtrl.create({
+	// 		subHeader: 'You need to log-in to access this page',
+	// 		buttons: ["OK"]
+	// 	}).then(alert => alert.present());
 
 
-	}
+	// }
 }

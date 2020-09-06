@@ -18,7 +18,6 @@ export class Ambassador {
 	}
 
 	fromJson (data: any) {
-		let holder: string = data.imgUrl;
 
 		this.ID = data.ID;
 		this.Title = data.title;
@@ -29,7 +28,7 @@ export class Ambassador {
 		this.Team = data.team;
 		this.Email = data.email;
 		this.Contact = data.contactnum;
-		this.Image = 'resources\icon.png'
+		this.Image = data.imgUrl.replace("http://the-v.net", "http://site.the-v.net");
 		this.Status = data.Status;
 		this.Rank = data.Rank;
 		this.Description = data.NewDescription;

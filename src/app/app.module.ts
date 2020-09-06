@@ -17,12 +17,14 @@ import { DatePicker } from '@ionic-native/date-picker/ngx'
 import { DatePipe } from '@angular/common'
 import { File } from '@ionic-native/file/ngx'
 import { FileOpener } from '@ionic-native/file-opener/ngx'
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,
+  BrowserModule,
     HttpClientModule,
     HttpModule,
     IonicStorageModule.forRoot(),
@@ -37,7 +39,9 @@ import { FileOpener } from '@ionic-native/file-opener/ngx'
     DatePipe,
     File,
     FileOpener,
-    SQLite
+    SQLite,
+    AuthenticationService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

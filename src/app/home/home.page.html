@@ -12,7 +12,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/ambassadors'], true)">
+        <ion-button size="large" class="home-buttons default-element-color" [routerLink] = "['/ambassadors']" routerDirection='forward'>
           <img src="assets/imgs/icn-ambassador.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">V AMBASSADORS</p>
@@ -22,7 +22,7 @@
         <img src="assets/imgs/vertical-hr.png">
       </ion-col>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/directory'], false)">
+        <ion-button size="large" class="home-buttons default-element-color" [routerLink] = "['/directory']" routerDirection='forward'>
           <img src="assets/imgs/icn-directory.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">DIRECTORY</p>
@@ -38,7 +38,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/tools'], false)">
+        <ion-button size="large" class="home-buttons default-element-color" [routerLink] = "['/tools']" routerDirection='forward'>
           <img src="assets/imgs/icn-tools.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">TOOLS</p>
@@ -47,11 +47,13 @@
         <img src="assets/imgs/vertical-hr.png">
       </ion-col>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/nominations'], false)">
+        <ion-button size="large" class="home-buttons default-element-color" *ngIf="hasNominationAccess" [routerLink] = "['/nominations']" routerDirection='forward'>
+          <img src="assets/imgs/icn-nomination.png">
+        </ion-button>
+        <ion-button size="large" class="home-buttons default-element-color" *ngIf="!hasNominationAccess" disabled>
           <img src="assets/imgs/icn-nomination.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">VA NOMINATION</p>
-
       </ion-col>
     </ion-row>
     <ion-row>
@@ -64,7 +66,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/videos'], true)">
+        <ion-button size="large" class="home-buttons default-element-color" [routerLink] = "['/videos']" routerDirection='forward'>
           <img src="assets/imgs/icn-videos.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">VIDEOS</p>
@@ -73,7 +75,10 @@
         <img src="assets/imgs/vertical-hr.png">
       </ion-col>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/travel-request'], false)">
+        <ion-button size="large" class="home-buttons default-element-color" *ngIf="!travelRequestAdmin" [routerLink] = "['/create-travel-request']" routerDirection='forward'>
+          <img src="assets/imgs/icn-travel.png">
+        </ion-button>
+        <ion-button size="large" class="home-buttons default-element-color" *ngIf="!travelRequestAdmin" [routerLink] = "['/travel-request']" routerDirection='forward'>
           <img src="assets/imgs/icn-travel.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">TRAVEL REQUEST</p>
@@ -89,7 +94,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button size="large" class="home-buttons default-element-color" (click)="openPage(['/notifications'], true)">
+        <ion-button size="large" class="home-buttons default-element-color" [routerLink] = "['/notification']" routerDirection='forward'>
           <img src="assets/imgs/icn-notification.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">NOTIFICATION</p>

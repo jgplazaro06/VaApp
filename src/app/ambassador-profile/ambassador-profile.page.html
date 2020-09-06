@@ -24,8 +24,17 @@
 </ion-header>
 <ion-content class="gradient-background">
   <ion-card style="background: #E3E5E6;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;">
-    <img src="assets/imgs/profile-photos-dato.png" style="margin:auto; width: 100%;"
+    <img [src]="ambassador.Image" style="margin:auto; width: 100%;"
       (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)">
+      <ion-card-header *ngIf="isPartner">
+        <ion-card-title>{{ambassador.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="isPartner">
+          <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title: {{ambassador.Position}}</p>
+          <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> IRID: {{ambassador.IRID}}</p>
+          <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email: {{ambassador.Email}}</p>
+          <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact Number: {{ambassador.Contact}}</p>
+      </ion-card-content>
   </ion-card>
   <!-- <img [src]="assets/imgs/profile-photos-dato"> -->
 
@@ -33,14 +42,14 @@
 
 
   <div *ngIf="isFounder">
-    <!-- <p class="default-text" > Is Founder</p> -->
+   <div [innerHtml]="ambassador.Description"></div>
   </div>
 
   <div *ngIf="isPartner">
-    <p class="default-text"> Is Partner</p>
+    <div [innerHtml]="ambassador.Description"></div>
   </div>
 
-  <div *ngIf="isAssociatePartner">
+  <div *ngIf="isAssociatePartner || isCouncil">
     <div>
       <p style="padding-left: 50px; font-weight: 700; font-size: 20px" class="default-text"> Full Name</p>
     </div>
@@ -71,9 +80,10 @@
 
   </div>
 
-  <div *ngIf="isCouncil">
-    <p class="brighter-text"> Is Council</p>
-  </div>
+  <!-- <div *ngIf="isCouncil">
+    <!-- <p class="brighter-text"> Is Council</p> -->
+    <!-- put ui for council here if needed -->
+  <!-- </div> -->
 
 </ion-content>
 <app-footer-tab></app-footer-tab>

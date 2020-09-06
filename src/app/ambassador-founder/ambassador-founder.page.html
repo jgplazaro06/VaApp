@@ -9,24 +9,24 @@
   </ion-toolbar>
 </ion-header>
 <ion-header>
-  <ion-toolbar class="lower-toolbar">
+  <ion-toolbar class="lower-toolbar" [routerLink]="['/ambassadors']" routerDirection="back">
     &nbsp; &nbsp; < V Founder </ion-toolbar> </ion-header> <ion-content>
       <ion-grid>
         <ion-row>
-          <ion-col>
-            <ion-card class="h-100 card-bg">
-              <img src="assets/imgs/btn-dato.png" />
+          <ion-col [routerLink]="['/ambassador-profile', dato.ID]" routerDiraction="forward">
+            <ion-card class="h-100 card-bg" >
+              <img [src]="assets/imgs/btn-dato.png" />
               <ion-card-header>
-                <ion-card-title>Dato Sri Vijay Eswaran</ion-card-title>
+                <ion-card-title>{{dato.Name}}</ion-card-title>
                 <ion-card-subtitle>V Founder</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
-          <ion-col>
-            <ion-card class="h-100 card-bg">
+          <ion-col [routerLink]="['/ambassador-profile', japa.ID]" routerDiraction="forward">
+            <ion-card class="h-100 card-bg" >
               <img src="assets/imgs/btn-japa.png" />
               <ion-card-header>
-                <ion-card-title>Joseph Bismark</ion-card-title>
+                <ion-card-title>{{japa.Name}}</ion-card-title>
                 <ion-card-subtitle>V Founder</ion-card-subtitle>
               </ion-card-header>
             </ion-card>

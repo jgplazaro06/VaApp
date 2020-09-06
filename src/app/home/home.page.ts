@@ -8,6 +8,7 @@ import { LoginEvents } from '../../events/login-event';
 import { HomeEvent } from '../../events/home-event';
 import { User } from '../../models/user.model';
 import { BackButtonService } from '../back-button.service'
+import { AuthenticationService } from '../services/Authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomePage {
   hasAccount: boolean = false;
   isSuperuser: boolean = false;
   kind: boolean = false;
-
+  hasNominationAccess = false;
+  travelRequestAdmin = false;
   constructor(
     @Optional() private routerOutlet: IonRouterOutlet,
     private platform: Platform,
@@ -31,7 +33,8 @@ export class HomePage {
     private sqlite: SQLite,
     private alertCtrl: AlertController,
     private router:Router,
-    private bckBtnSrvc: BackButtonService
+    private bckBtnSrvc: BackButtonService,
+    private authService:AuthenticationService
   ) {
 
     // platform.backButton.subscribeWithPriority(0, () => {
@@ -47,52 +50,27 @@ export class HomePage {
     //     }
     //   }
     // })
-
-    this.event.subscribe(HomeEvent.EVENT_CHANGE, _ => {
-      this.storage.get("user")
-        .then((val: User) => {
-          this.user = val;
-
-          this.isSuperuser = val.Type;
-          this.kind = val.Class;
-          this.hasAccount = true;
-        })
+    this.authService.authState.subscribe(val=>{
+      if(val){
+        //logged in
+        this.authService.getUser().then(user=>{
+          //set if user is travel requester or admin
+          if(!user.Class){
+            this.travelRequestAdmin = false;
+          } else if(user.Class && user.Type === 'Poweruser'){
+            this.travelRequestAdmin = true;
+          }
+          if(user.Type === 'Poweruser' || user.Type === 'V Partner'){
+            this.hasNominationAccess = true;
+          }
+          else{
+            this.hasNominationAccess = false;
+          }
+        });
+      } else {
+        //logged out
+      }
     });
-
-    this.storage.get("user")
-      .then((val: User) => {
-        if (val == undefined || val == null) {
-          this.sqlite.create({
-            name: "vapp.db",
-            location: "default"
-          }).then((db: SQLiteObject) => {
-            db.executeSql("select * from UserData", [])
-              .then((val) => {
-                if (val.rows.length > 0) {
-                  this.kind = val.rows.item(0).Keynum == 9;
-
-                  let user = new User();
-                  user.fromJson(val.rows.item(0), this.kind);
-
-                  this.storage.set("user", user);
-                  LoginEvents.stateChanged(this.event);
-
-                  this.hasAccount = true;
-                  this.isSuperuser = user.Type;
-                }
-              })
-              .catch((err) => console.log(err));
-          });
-        }
-
-        else {
-          this.user = val;
-
-          this.hasAccount = true;
-          this.isSuperuser = val.Type;
-          this.kind = val.Class;
-        }
-      });
   }
 
   openPage(link: string, accessible: boolean) {

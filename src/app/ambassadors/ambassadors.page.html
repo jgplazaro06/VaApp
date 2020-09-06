@@ -9,35 +9,37 @@
   </ion-toolbar>
 </ion-header>
 <ion-header>
-  <ion-toolbar class="lower-toolbar">
-
-
+  <ion-toolbar class="lower-toolbar"  [routerLink]="['/home']" routerDirection="back">
     &nbsp; &nbsp; < V Ambassadors </ion-toolbar> </ion-header> <ion-content>
       <ion-grid style="text-align: center;">
-        <img class="img-btn" src="assets/imgs/vpartners.png">
-        <br>
-        <br>
-        <ion-label class="ambassador-title">V Partner</ion-label>
+        <div [routerLink]="['/ambassador-founder']"
+        routerDirection="forward">
+          <img class="img-btn" src="assets/imgs/vpartners.png">
+          <br>
+          <br>
+          <ion-label class="ambassador-title">V Founders</ion-label>
+      </div>
 
         <ion-grid>
           <ion-row>
-            <ion-col><img src="assets/imgs/vp-icon.png" [routerLink]="['/ambassador-founder']"
-                routerDirection="forward"></ion-col>
-            <ion-col><img src="assets/imgs/avp-icon.png"></ion-col>
-            <ion-col><img src="assets/imgs/vc-icon.png"></ion-col>
+            <ion-col [routerLink]="['/ambassador-partners']"
+            routerDirection="forward">
+              <ion-row>
+                <img src="assets/imgs/vp-icon.png" >
+              </ion-row>
+              <ion-row><strong>V Partners</strong></ion-row>
+              </ion-col>
+            <ion-col [routerLink]="['/ambassador-associate']" routerDirection="forward">
+              <ion-row><img src="assets/imgs/avp-icon.png"></ion-row>
+              <ion-row><strong>Associate <br>V Partners</strong></ion-row>
+              </ion-col>
+            <ion-col [routerLink]="['/ambassador-council']" routerDirection="forward">
+              <ion-row><img src="assets/imgs/vc-icon.png"></ion-row>
+              <ion-row><strong>V Council</strong></ion-row>
+              </ion-col>
           </ion-row>
         </ion-grid>
 
-        <ion-grid>
-          <ion-row>
-            <ion-col [routerLink]="['/ambassador-partner']" routerDirection="forward"><strong>V Partners</strong>
-            </ion-col>
-            <ion-col [routerLink]="['/ambassador-associate']" routerDirection="forward"><strong>Associate <br>V
-                Partners</strong></ion-col>
-            <ion-col [routerLink]="['/ambassador-council']" routerDirection="forward"><strong>V Council</strong>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
         <!-- <ion-row *ngFor="let format of upcomingFormat">
       <br />
 

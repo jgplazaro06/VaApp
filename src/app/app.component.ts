@@ -13,6 +13,7 @@ import { Defaults } from './objects';
 import { Downloader } from '../models/downloader.model';
 import { async } from '@angular/core/testing';
 import { NavigationExtras, Router } from '@angular/router';
+import { AuthenticationService } from './services/Authentication.service';
 
 @Component({
 	selector: 'app-root',
@@ -23,55 +24,9 @@ import { NavigationExtras, Router } from '@angular/router';
 export class AppComponent {
 	@ViewChildren(IonRouterOutlet) routerOutlet: QueryList<IonRouterOutlet>;
 
-	userQuery: string = `create table if not exists UserData(
-		ID varchar(63),
-		Image varchar(127),
-		Name varchar(63),
-		Email varchar(63),
-		Type varchar(31),
-		ContactNumber varchar(63),
-		CompanyTitle varchar(127),
-		Region varchar(15),
-		Keynum int
-	);`;
-
-	ambassadorQuery: string = `create table if not exists Ambassador(
-		ID varchar(63),
-		title varchar(63),
-		position varchar(63),
-		companytitle varchar(63),
-		name varchar(127),
-		irid varchar(15),
-		team varchar(31),
-		email varchar(127),
-		contactnum varchar(31),
-		imgUrl varchar(127),
-		Status varchar(15),
-		Rank varchar(31),
-		NewDescription varchar(4095)
-	);`;
-
-	corporateQuery: string = `create table if not exists Corporate(
-		ID varchar(63),
-		runningNum varchar(15),
-		Title varchar(15),
-		Name varchar(63),
-		CompanyTitle varchar(63),
-		ContactNumber varchar(31),
-		Email varchar(127),
-		Department varchar(15),
-		Region varchar(63),
-		Image varchar(127)
-	);`;
-
-	// versionQuery: string = `create table if not exists Version(
-	// 	id int,
-	// 	current varchar(7)
-	// );`;
-
 	alertShown: boolean = false;
 	load: any;
-	appPages: Array<{ title: string, component: string, accessible: boolean }>;
+	appPages: Array<{ title: string, component: string}>;
 	user: User;
 	hasAccount: boolean = false;
 	first: boolean = true;
@@ -79,130 +34,71 @@ export class AppComponent {
 	constructor(
 		private platform: Platform,
 		private router: Router,
-		statusBar: StatusBar,
-		splashScreen: SplashScreen,
+		private statusBar: StatusBar,
+		private splashScreen: SplashScreen,
 		private storage: Storage,
 		private event: Events,
 		private sqlite: SQLite,
 		private http: Http,
 		private menu: MenuController,
 		private alertCtrl: AlertController,
-		private loadCtrl: LoadingController) {
-		platform.ready().then(() => {
-			statusBar.styleDefault();
-			splashScreen.hide();
+        private loadCtrl: LoadingController,
+        private authenticationService: AuthenticationService) {
+            this.initializeApp();
+		
+    }
+    initializeApp(){
+        this.platform.ready().then(() => {
+			this.statusBar.styleDefault();
+            this.splashScreen.hide();
 
-			platform.backButton.subscribeWithPriority(0, () => {
-				console.log("test")
-				// console.log(this.routerOutlet.canGoBack)
-				// console.log(this.routerOutlet.canGoBack())
-				// console.log(this.routerOutlet)
+           
 
-				// if (!this.alertShown) {
-				// 	if (this.routerOutlet.canGoBack) {
-				// 		this.routerOutlet.pop();
-				// 	}
-				// 	else {
-				// 		this.presentConfirm();
-				// 	}
-				// }
-
+			this.platform.backButton.subscribeWithPriority(0, () => {
 				this.routerOutlet.forEach((outlet: IonRouterOutlet) => {
 					if (outlet && outlet.canGoBack()) {
 						outlet.pop();
 					}
 					else {
-						this.presentConfirm();
+						this.confirmAppExit();
 					}
 				})
 			})
 
-
-			this.loadCtrl.create({
-				spinner: "crescent",
-				message: "Downloading..."
-			}).then(loader => {
-				this.load = loader;
-			});
-
+			this.authenticationService.authState.subscribe(state => {
+				if (state) {
+					this.retrieveData();
+					this.hasAccount = true;
+				} else {
+				  this.hasAccount = false;
+				}
+			  });
 			this.event.subscribe(LoginEvents.EVENT_CHANGE, _ => {
-				this.retrieveData();
-			});
+				
+            });
+            
 
 			this.appPages = [
-				{ title: "Profiles", component: '/profile-list', accessible: true },
-				{ title: "V Ambassadors", component: '/ambassadors', accessible: true },
-				{ title: "Notifications", component: '/notifications', accessible: true },
-				{ title: "Videos", component: '/videos', accessible: true },
-				{ title: "Corporate", component: '/corporate', accessible: false },
-				{ title: "My Tools", component: '/my-tools', accessible: false },
-				{ title: "Travel Requests", component: '/travel-request', accessible: false }
+				{ title: "Profiles", component: '/profile-list'},
+				{ title: "V Ambassadors", component: '/ambassadors'},
+				{ title: "Notifications", component: '/notifications'},
+				{ title: "Videos", component: '/videos'},
+				{ title: "Corporate", component: '/corporate'},
+				{ title: "My Tools", component: '/my-tools'},
+				{ title: "Travel Requests", component: '/travel-request' }
 			];
-
-			this.setupSqlTables();
-
-			// this.http.get('http://localhost:8080/gbd').subscribe(res => {
-			// 	console.log(res.json())
-			// })
-
-			// this.sqlite.create({
-			// 	name: "vapp.db",
-			// 	location: "default"
-			// }).then((db: SQLiteObject) => {
-			// 	db.executeSql(this.userQuery, [])
-			// 		.then(() => db.executeSql(this.ambassadorQuery, [])
-			// 			.then(() => db.executeSql(this.corporateQuery, [])
-			// 				.then(() => db.executeSql(this.versionQuery, [])
-			// 					// .then(() => this.versionChecker())
-			// 				)))
-			// 	// .catch(() => this.versionChecker());
-
-			// 	db.executeSql("select * from UserData", [])
-			// 		.then(val => {
-			// 			console.log(val.rows);
-
-			// 			if (val.rows.length > 0) {
-			// 				this.user = new User();
-			// 				this.user.fromJson(val.rows.item(0), val.rows.item(0).Keynum == 9);
-
-			// 				this.appPages[6].component = this.user.Class ? this.appPages[6].component : '/create-travel-request';
-
-			// 				if (this.user.Type && this.first) {
-			// 					this.first = false;
-			// 					this.appPages.push({ title: "Nominations", component: '/nominations', accessible: false });
-			// 				}
-
-			// 				this.hasAccount = true;
-			// 			}
-			// 		})
-			// 		.catch(err => console.log(err));
-			// }).catch(err => console.log(err));
 		});
-	}
-	setupSqlTables(){					
-		this.sqlite.create({
-            name: "vapp.db",
-            location: "default"
-          }).then((db:SQLiteObject)=>{
-			db.executeSql(this.userQuery,[])
-			.then(()=>db.executeSql(this.ambassadorQuery,[])
-				.then(()=>db.executeSql(this.corporateQuery,[])))
-		  })
-		  .catch(err=>{
-			  console.log(err);
-		  })
-	}
+    }
+	
 
-	presentConfirm() {
-		this.alertCtrl.create({
+	async confirmAppExit() {
+		const loader = await this.alertCtrl.create({
 			header: "Confirm Exit",
 			subHeader: "Are you sure you want to exit?",
 			buttons: [
 				{
 					text: "No",
-					handler: () => {
-						this.alertShown = false;
-					}
+					role: 'Cancel',
 				},
 				{
 					text: "Yes",
@@ -211,191 +107,41 @@ export class AppComponent {
 					}
 				}
 			]
-		}).then(loader => {
-			loader.present().then(() =>
-				this.alertShown = true)
+        });
+        await loader.present();
+	}
+
+	retrieveData() {
+		this.authenticationService.getUser().then(user=>{
+			if(!user.Class){
+				this.appPages[6].component = '/create-travel-request';
+			}
+			if(this.user.Type === 'Poweruser' || this.user.Type === 'V PARTNERS'){
+				this.appPages.push({ title: "Nominations", component: '/nominations' });
+			}
 		});
 	}
 
-	// goHome() {
-	// 	this.router.navigate(['/home']);
-	// 	//this.navCtrl.navigateRoot('/home');
-	// }
-
-	openPage(p: { title: string, component: string, accessible: boolean }) {
-		console.log(p)
-		if (this.hasAccount || p.accessible) {
-			let navParams: NavigationExtras = {
-				state: {
-					data: this.user
+	async logOut() {
+		const logoutAlert = await this.alertCtrl.create({
+			header: 'Logout?',
+			message: 'Are you sure you want to logout?',
+			buttons: [
+				{
+					text: 'Yes',
+					handler: ()=>{
+						this.authenticationService.logout().then(()=>{
+							this.appPages.pop();
+							this.appPages[6].component = '/travel-request';
+						});
+					}
+				},
+				{
+					text:'Cancel',
+					role: 'Cancel'
 				}
-			}
-			this.router.navigate([p.component]);
-			//this.navCtrl.navigateRoot(p.component, navParams);
-		}
-
-		else {
-			this.alertBox("", "You need to log-in to access this page");
-		}
-	}
-
-	openProfile() {
-		if (!(this.user.Name == undefined)) {
-			let navParams: NavigationExtras = {
-				state: {
-					data: this.user
-				}
-			}
-			this.router.navigate(['/profile'], navParams);
-			//this.navCtrl.navigateForward(['/profile'], navParams);
-		}
-	}
-
-	// versionChecker() {
-	// 	this.sqlite.create({
-	// 		name: "vapp.db",
-	// 		location: "default"
-	// 	}).then((db: SQLiteObject) => {
-	// 		db.executeSql("select * from Version", [])
-	// 			.then(val => {
-	// 				this.http.get("http://cums.the-v.net/upgrade.aspx")
-	// 					.subscribe(
-	// 						res => {
-	// 							if (val.rows.length > 0) {
-	// 								if (Number(val.rows.item(0).current) < Number(res)) {
-	// 									db.executeSql("delete from Ambassador; delete from Corporate;", [])
-	// 										.then(() => {
-	// 											this.alertCtrl.create({
-	// 												header: "Outdated Version",
-	// 												subHeader: "You must update your app to continue",
-	// 												buttons: [
-	// 													{
-	// 														text: "OK",
-	// 														handler: () => {
-	// 															this.load.present();
-	// 															let query: string = `update Version set current = '${res}' where id = '1'`;
-
-	// 															this.event.subscribe(DownloadsEvent.EVENT_CHANGE, _ => {
-	// 																db.executeSql(query, []);
-	// 																this.load.dismiss();
-	// 															});
-
-	// 															let download = new Downloader(this.http, this.sqlite, this.event);
-	// 															download.storeInLocal();
-	// 															console.log("dlstlcl")
-	// 														}
-	// 													}
-	// 												]
-	// 											}).then(alert => alert.present())
-	// 										})
-
-	// 								}
-	// 							}
-
-	// 							else {
-	// 								this.alertCtrl.create({
-	// 									header: "Outdated Version",
-	// 									subHeader: "You must update your app to continue",
-	// 									buttons: [
-	// 										{
-	// 											text: "OK",
-	// 											handler: () => {
-	// 												this.load.present();
-	// 												let val: string = `insert into Version values('1', '${res}')`;
-
-	// 												this.event.subscribe(DownloadsEvent.EVENT_CHANGE, _ => {
-	// 													db.executeSql(val, []);
-	// 													this.load.dismiss();
-	// 												})
-
-	// 												let download = new Downloader(this.http, this.sqlite, this.event);
-	// 												download.storeInLocal();
-	// 											}
-	// 										}
-	// 									]
-	// 								}).then(alert => alert.present());
-	// 							}
-	// 						},
-	// 						err => console.log(err)
-	// 					);
-	// 			}).catch(err => console.log(err))
-	// 	}).catch(err => console.log(err));
-	// }
-
-	retrieveData() {
-		this.storage.get("user")
-			.then((val: User) => {
-				this.user = val;
-
-				this.appPages[6].component = this.user.Class ? this.appPages[6].component : "CreateTravelRequestPage";
-
-				if (this.user.Type && this.first) {
-					this.first = false;
-					this.appPages.push({ title: "Nominations", component: '/nominations', accessible: false });
-				}
-
-				this.hasAccount = true;
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}
-
-	logOut() {
-		this.storage.clear()
-			.then(() => {
-				this.menu.close()
-					.then(() => {
-						this.hasAccount = false;
-
-						// this.sqlite.create({
-						// 	name: "vapp.db",
-						// 	location: "default"
-						// }).then((db: SQLiteObject) => {
-						// 	db.executeSql(`delete from UserData`, [])
-						// 		.then(() => {
-						// 			if (this.user.Type) {
-						// 				this.appPages.pop();
-						// 				this.user = null;
-						// 			}
-
-						// 			this.alertBox("Success", "You have been logged out");
-						// 			this.navCtrl.navigateRoot('/home');
-						// 		})
-						// 		.catch(err => console.log(err));
-						// });
-					})
-					.catch(err => this.alertBox("Error", err));
-
-
-			});
-	}
-
-	logIn() {
-		//console.log("Hello")
-		this.router.navigate(['/login']);
-		//this.navCtrl.navigateForward('login');
-	}
-
-	adminLogIn() {
-		console.log("Hello")
-		this.router.navigate(['/login-admin']);
-		//this.navCtrl.navigateForward('login-admin');
-	}
-
-	goToVotes() {
-		this.router.navigate(['/pdf-votes']);
-		//this.navCtrl.navigateForward('pdf-votes');
-
-	}
-
-	alertBox(head: string, message: string) {
-		this.alertCtrl.create({
-			header: head,
-			subHeader: message,
-			buttons: ["OK"]
-		}).then(alert => alert.present());
-
-
+			]
+		});
+		await logoutAlert.present();
 	}
 }

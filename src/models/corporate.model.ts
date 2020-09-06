@@ -26,6 +26,6 @@ export class Corporate {
 		this.Email = data.Email;
 		this.Department = data.Department;
 		this.Region = data.Region;
-		this.Image = holder.replace("www.", "").replace("the-v.net", "site.the-v.net");
+		this.Image = holder.replace("www.", "").replace("http://the-v.net", "http://site.the-v.net");
 	}
 }
