@@ -141,7 +141,6 @@ export class EditPowerPage implements OnInit {
 
             this.storage.set('user', this.holder);
             this.authState.next(true);
-            this.navCtrl.navigateRoot(['/home'])
             // this.authenticationService.logout();
           }
 

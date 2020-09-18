@@ -102,7 +102,14 @@ export class EditVaPage implements OnInit {
 						title = "Success";
 						sub = "Changes Saved";
 
-					
+						this.holder.Email = this.profile.Email;
+						this.holder.Contact = this.profile.Contact;
+						this.holder.Name = this.profile.Name;
+						// this.holder. = this.profile.Position;
+
+						this.storage.set('user', this.holder).then(() => {
+							//move to home?
+						});
 
 					}
 

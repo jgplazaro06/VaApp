@@ -48,22 +48,19 @@
 </ion-header>
 <ion-content class="gradient-background">
   <ion-card style="background: #E3E5E6;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;">
-    <img *ngIf="!isFounder" [src]="ambassador.imgUrl" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)"
-      style="margin:auto; width: 100%;" />
+    <img *ngIf="!isFounder" [src]="ambassador.imgUrl" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)" style="margin:auto; width: 100%;" />
     <!-- </ion-img> -->
     <ion-card-header *ngIf="isPartner">
-      <ion-card-title class="default-text" style="text-align: center; font-weight: 900; ">
-        {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}
-      </ion-card-title>
+      <ion-card-title>{{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</ion-card-title>
     </ion-card-header>
     <ion-card-content *ngIf="isPartner">
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
         {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> IRID:
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> IRID:
         {{ambassador.irid != "" ? ambassador.irid : 'Unavailable'}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
         {{ambassador.email != "" ? ambassador.email : 'Unavailable'}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
         Number: {{ambassador.contactnum != "" ? ambassador.contactnum : 'Unavailable'}}</p>
     </ion-card-content>
   </ion-card>
@@ -75,47 +72,55 @@
   <div *ngIf="isFounder">
     <ion-card style="background: #E3E5E6;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;">
       <img [src]="ambassador.Image" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)"
-        style="margin:auto; width: 100%;">
-      <!-- <ion-card-header>
-        <ion-card-title style="text-align: left;">{{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</ion-card-title>
+        style="margin:auto; width: 65%; height: 50%;">
+      <ion-card-header>
+        <ion-card-title style="text-align: center;">{{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p class="default-text" style="text-align: left; margin-top: 0px;margin-bottom: 0px; font-weight: 700;">
+        <p class="default-text" style="text-align: center; margin-top: 0px;margin-bottom: 0px; font-weight: 700;">
           Title:
           {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}</p>
-      </ion-card-content> -->
+      </ion-card-content>
     </ion-card>
-    <div [innerHtml]="ambassador.NewDescription" style="padding: 40px; text-align: left; color: #042F66;"></div>
+    <div [innerHtml]="ambassador.NewDescription" style="padding: 40px; text-align: center; color: #042F66;"></div>
   </div>
 
   <div *ngIf="isPartner">
-    <div [innerHtml]="ambassador.NewDescription" style="padding: 40px; text-align: left; color: #042F66"></div>
+    <div [innerHtml]="ambassador.NewDescription" style="padding: 40px; text-align: center; color: #042F66"></div>
   </div>
 
   <div *ngIf="isAssociatePartner || isCouncil">
-    <ion-card-content>
-      <p style="text-align: center; font-weight: 900; font-weight: 700; font-size: 20px" class="default-text">
-        {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
+    <div>
+      <p style="padding-left: 50px; font-weight: 700; font-size: 20px" class="default-text"> {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</p>
+    </div>
+    <div>
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
         {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}
       </p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Team:
+    </div>
+    <div>
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Team:
         {{ambassador.team != "" ? ambassador.team : 'Unavailable'}}
       </p>
-      <!-- <div>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Based
+    </div>
+    <!-- <div>
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Based
         Country:</p>
     </div>
     <div>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Year of
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Year of
         Joined:</p>
     </div> -->
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
+    <div>
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
         {{ambassador.email != "" ? ambassador.email : 'Unavailable'}}
       </p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
+    </div>
+    <div>
+      <p class="default-text" style="padding-left: 50px; margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
         Number: {{ambassador.contactnum != "" ? ambassador.contactnum : 'Unavailable'}}</p>
-    </ion-card-content>
+    </div>
+
   </div>
 
   <!-- <div *ngIf="isCouncil">

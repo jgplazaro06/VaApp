@@ -52,7 +52,7 @@
       style="margin:auto; width: 100%;" />
     <!-- </ion-img> -->
     <ion-card-header *ngIf="isPartner">
-      <ion-card-title class="default-text" style="text-align: center; font-weight: 900; ">
+      <ion-card-title class="default-text" style="text-align: center;">
         {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}
       </ion-card-title>
     </ion-card-header>
@@ -93,16 +93,21 @@
   </div>
 
   <div *ngIf="isAssociatePartner || isCouncil">
-    <ion-card-content>
-      <p style="text-align: center; font-weight: 900; font-weight: 700; font-size: 20px" class="default-text">
+    <div>
+      <p style="text-align: center; font-weight: 700; font-size: 20px" class="default-text">
         {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</p>
+    </div>
+    <div>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
         {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}
       </p>
+    </div>
+    <div>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Team:
         {{ambassador.team != "" ? ambassador.team : 'Unavailable'}}
       </p>
-      <!-- <div>
+    </div>
+    <!-- <div>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Based
         Country:</p>
     </div>
@@ -110,12 +115,16 @@
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Year of
         Joined:</p>
     </div> -->
+    <div>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
         {{ambassador.email != "" ? ambassador.email : 'Unavailable'}}
       </p>
+    </div>
+    <div>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
         Number: {{ambassador.contactnum != "" ? ambassador.contactnum : 'Unavailable'}}</p>
-    </ion-card-content>
+    </div>
+
   </div>
 
   <!-- <div *ngIf="isCouncil">

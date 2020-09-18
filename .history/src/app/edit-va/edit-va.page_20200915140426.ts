@@ -17,7 +17,7 @@ export class EditVaPage implements OnInit {
 	name: string;
 	mainSource: any;
 	profile: Ambassador = new Ambassador();
-	holder: User = new User();
+
 	constructor(
 		private https: HttpClient,
 		private storage: Storage,
@@ -30,7 +30,6 @@ export class EditVaPage implements OnInit {
 		this.storage.get("user")
 			.then((val: User) => {
 				this.name = val.Name;
-				this.holder = val;
 			})
 			.catch((err) => {
 				console.log(err);
@@ -101,9 +100,6 @@ export class EditVaPage implements OnInit {
 					if (res == "True") {
 						title = "Success";
 						sub = "Changes Saved";
-
-					
-
 					}
 
 					else {

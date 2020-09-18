@@ -102,7 +102,18 @@ export class AppComponent {
 		}
 		else {
 			// console.log(route)
-			this.router.navigate([route])
+			if (route == '/travel-request') {
+				let navParams: NavigationExtras = {
+					state: {
+						data: this.user
+					}
+				}
+				// this.navCtrl.navigateForward(['/profile'], navParams);
+
+				this.router.navigate(['/travel-request'], navParams);
+			}
+			else
+				this.router.navigate([route])
 		}
 	}
 	goToProfile() {

@@ -101,7 +101,6 @@ export class AppComponent {
 			}).then(alert => alert.present());
 		}
 		else {
-			// console.log(route)
 			this.router.navigate([route])
 		}
 	}

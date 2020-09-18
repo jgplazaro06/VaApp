@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Platform, Events, NavController } from '@ionic/angular';
+import { Platform, Events } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { Http, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { User } from 'src/models/user.model';
 import { HTTP } from '@ionic-native/http/ngx'
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +13,7 @@ export class AuthenticationService {
 	authState = new BehaviorSubject(false);
 	private u = new User();
 
-	constructor(private storage: Storage, private navCtrl: NavController, private platform: Platform, private http: Http, private nativeHttp: HTTP, private event: Events) {
+	constructor(private storage: Storage, private platform: Platform, private http: Http, private nativeHttp: HTTP, private event: Events) {
 		this.platform.ready().then(() => {
 			//check if logged in
 			this.ifLoggedIn();
@@ -31,7 +30,6 @@ export class AuthenticationService {
 	async logout() {
 		await this.storage.remove('user');
 		this.authState.next(false);
-		this.navCtrl.navigateRoot(['/home'])
 	}
 	async login(username: string, password: string) {
 		let options = new RequestOptions({

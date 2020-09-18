@@ -52,7 +52,7 @@
       style="margin:auto; width: 100%;" />
     <!-- </ion-img> -->
     <ion-card-header *ngIf="isPartner">
-      <ion-card-title class="default-text" style="text-align: center; font-weight: 900; ">
+      <ion-card-title class="default-text" style="text-align: center;">
         {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}
       </ion-card-title>
     </ion-card-header>
@@ -94,7 +94,7 @@
 
   <div *ngIf="isAssociatePartner || isCouncil">
     <ion-card-content>
-      <p style="text-align: center; font-weight: 900; font-weight: 700; font-size: 20px" class="default-text">
+      <p style="text-align: center; font-weight: 700; font-size: 20px" class="default-text">
         {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
         {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}

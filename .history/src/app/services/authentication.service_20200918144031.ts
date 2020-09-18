@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Platform, Events, NavController } from '@ionic/angular';
+import { Platform, Events } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { Http, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { User } from 'src/models/user.model';
 import { HTTP } from '@ionic-native/http/ngx'
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +13,7 @@ export class AuthenticationService {
 	authState = new BehaviorSubject(false);
 	private u = new User();
 
-	constructor(private storage: Storage, private navCtrl: NavController, private platform: Platform, private http: Http, private nativeHttp: HTTP, private event: Events) {
+	constructor(private storage: Storage, private platform: Platform, private http: Http, private nativeHttp: HTTP, private event: Events) {
 		this.platform.ready().then(() => {
 			//check if logged in
 			this.ifLoggedIn();
@@ -31,7 +30,6 @@ export class AuthenticationService {
 	async logout() {
 		await this.storage.remove('user');
 		this.authState.next(false);
-		this.navCtrl.navigateRoot(['/home'])
 	}
 	async login(username: string, password: string) {
 		let options = new RequestOptions({
@@ -68,7 +66,21 @@ export class AuthenticationService {
 					//let user: User = new User();
 					//user.fromJson(res[0], kind);
 					console.log(res[0])
+					let reader = new FileReader();
+					this.nativeHttp.sendRequest(res[0].Image, { method: 'get', responseType: 'blob', data: {}, headers: {} })
+						.then(result => {
+							let data;
+							reader.readAsDataURL(result.data);
+							reader.onloadend = () => {
+								data = reader.result
+								// data = "data:image/jpeg;base64," + data;
+								res[0].Image = data
+								// amb['imgUrl'] = this.sanitizer.bypassSecurityTrustResourceUrl(amb['imgUrl'])
 
+							}
+						}, error => {
+							console.log(error)
+						})
 					this.storage.set('user', res[0]);
 					this.authState.next(true);
 					return true;
@@ -82,25 +94,9 @@ export class AuthenticationService {
 	}
 
 	async getUser() {
-		const reader = new FileReader();
 		const user = await this.storage.get('user');
 		let kind = Object.keys(user).length == 9;
 		this.u.fromJson(user, kind);
-
-		this.nativeHttp.sendRequest(this.u.Image, { method: 'get', responseType: 'blob', data: {}, headers: {} })
-			.then(result => {
-				let data;
-				reader.readAsDataURL(result.data);
-				reader.onloadend = () => {
-					data = reader.result
-					// data = "data:image/jpeg;base64," + data;
-					this.u.Image = data
-					// amb['imgUrl'] = this.sanitizer.bypassSecurityTrustResourceUrl(amb['imgUrl'])
-
-				}
-			}, error => {
-				console.log(error)
-			})
 
 		return this.u;
 	}

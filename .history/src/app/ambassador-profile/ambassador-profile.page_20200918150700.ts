@@ -66,9 +66,8 @@ export class AmbassadorProfilePage implements OnInit {
         switch (this.ambassador.title) {
           case 'VF':
             this.isFounder = true;
-            if (this.ambassador.Rank == '1') this.ambassador.Image = '../../assets/dataprof.png'
-            else this.ambassador.Image = '../../assets/japaprof.png'
-            console.log(this.ambassador)
+            if (this.ambassador.Rank == '1') this.ambassador.Image = 'assets/datoprof.png'
+            else this.ambassador.Image = 'assets/imgs/japaprof.png'
             break;
           case 'VP':
             this.isPartner = true;

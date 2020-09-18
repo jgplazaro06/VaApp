@@ -6,16 +6,12 @@ import { User } from '../../models/user.model';
 import { Corporate } from '../../models/corporate.model';
 import { NavController, NavParams, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
-import { BehaviorSubject } from 'rxjs';
-
 @Component({
   selector: 'app-edit-power',
   templateUrl: './edit-power.page.html',
   styleUrls: ['./edit-power.page.scss'],
 })
 export class EditPowerPage implements OnInit {
-	authState = new BehaviorSubject(false);
   name: string;
   mainSource: any;
   disablePosition: boolean;
@@ -28,8 +24,7 @@ export class EditPowerPage implements OnInit {
     private storage: Storage,
     private alertCtrl: AlertController,
     private aroute: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private router: Router
   ) {
 
 
@@ -133,16 +128,15 @@ export class EditPowerPage implements OnInit {
           if (res == "True") {
             title = "Success";
             sub = "Changes Saved";
-            // sub = "Changes Saved, Please re-login";
 
             this.holder.Email = this.profile.Email;
             this.holder.Contact = this.profile.Contact;
             this.holder.Name = this.profile.Name;
+            // this.holder. = this.profile.Position;
 
-            this.storage.set('user', this.holder);
-            this.authState.next(true);
-            this.navCtrl.navigateRoot(['/home'])
-            // this.authenticationService.logout();
+            this.storage.set('user', this.holder).then(() => {
+              //move to home?
+            });
           }
 
           else {

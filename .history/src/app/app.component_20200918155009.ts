@@ -82,12 +82,12 @@ export class AppComponent {
 			this.appPages = [
 				// { title: "My Profile", component: '/profile'},
 				// { title: "Home", component: '/home'},
-				{ title: "V Ambassadors", component: '/ambassadors', accesible: this.hasAccount },
+				{ title: "V Ambassadors", component: '/ambassadors', accesible: false },
 				{ title: "VA Videos", component: '/videos', accesible: true },
 				{ title: "Directory", component: '/directory', accesible: true },
 				// { title: "Corporate", component: '/corporate'},
-				{ title: "My Tools", component: '/tools', accesible: this.hasAccount },
-				{ title: "My Tavel", component: '/travel-request', accesible: this.hasAccount }
+				{ title: "My Tools", component: '/my-tools', accesible: false },
+				{ title: "My Tavel", component: '/travel-request', accesible: false }
 			];
 		});
 	}
@@ -101,7 +101,6 @@ export class AppComponent {
 			}).then(alert => alert.present());
 		}
 		else {
-			// console.log(route)
 			this.router.navigate([route])
 		}
 	}
@@ -144,15 +143,14 @@ export class AppComponent {
 			}
 			if (this.user.Type === 'Poweruser' || this.user.Type === 'V PARTNERS') {
 				this.appPages[6].component = '/create-travel-request';
+
 				this.appPages.push({ title: "VA Nominations", component: '/nominations', accesible: true });
 			}
 
-
+			this.appPages.forEach(page => {
+				page.accesible = true;
+			})
 		});
-
-		this.appPages.forEach(page => {
-			page.accesible = true;
-		})
 	}
 
 	async logOut() {
@@ -167,12 +165,12 @@ export class AppComponent {
 							this.appPages = [
 								// { title: "My Profile", component: '/profile'},
 								// { title: "Home", component: '/home'},
-								{ title: "V Ambassadors", component: '/ambassadors', accesible: this.hasAccount },
+								{ title: "V Ambassadors", component: '/ambassadors', accesible: false },
 								{ title: "VA Videos", component: '/videos', accesible: true },
 								{ title: "Directory", component: '/directory', accesible: true },
 								// { title: "Corporate", component: '/corporate'},
-								{ title: "My Tools", component: '/tools', accesible: this.hasAccount },
-								{ title: "My Tavel", component: '/travel-request', accesible: this.hasAccount }
+								{ title: "My Tools", component: '/tools', accesible: false },
+								{ title: "My Tavel", component: '/travel-request', accesible: false }
 							];
 
 						});
