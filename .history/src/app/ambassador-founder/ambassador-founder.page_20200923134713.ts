@@ -31,6 +31,7 @@ export class AmbassadorFounderPage implements OnInit {
       //   // this.corporate.push(item);
       // }
       // console.log(val.json())
+      console.log(val.item(1))
       for (let i = 0; i < val.length; i++) {
         let item = val.item(i);
         // do something with it
@@ -38,11 +39,11 @@ export class AmbassadorFounderPage implements OnInit {
         // this.corporate.push(item);
         // }
         // this.corporate = holder;
-        if (val.item(i).Rank == '1') {
-          this.dato = val.item(i)
+        if (item(i).Rank == '1') {
+          this.dato = item(i)
         }
-        else if (val.item(i).Rank == '2') {
-          this.japa = val.item(i)
+        else if (item(i).Rank == '2') {
+          this.japa = item(i)
         }
       }
 

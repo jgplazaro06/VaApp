@@ -22,26 +22,24 @@
 
 <ion-content>
   <ion-card *ngFor="let req of requestList; let i = index" style="border-radius: 10px !important;">
-    <ion-toolbar style="--min-height: 20px !important" *ngIf="requestList.length > 1 && i != 0">
-      <ion-button fill="clear" slot="end" size="small" style="color: black;" (click)="removeRequest(i)">
-        <ion-icon name="close" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-toolbar>
+    <ion-button fill="clear" >
+      <ion-icon slot="end" name="close"></ion-icon>
+    </ion-button>
     <ion-item>
-      <ion-label position="floating">{{i+1}}. Destination</ion-label>
+      <ion-label class="default-text">{{i+1}}. Destination</ion-label>
       <ion-input required type="text" autofocus [(ngModel)]="req.Destination"></ion-input>
     </ion-item>
     <!-- <ion-item> -->
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating">From</ion-label>
+          <ion-label class="default-text">From</ion-label>
           <ion-input required type="date" [(ngModel)]="req.StartDate"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label position="floating">To</ion-label>
+          <ion-label class="default-text">To</ion-label>
           <ion-input required type="date" [(ngModel)]="req.EndDate" [min]="req.StartDate"></ion-input>
         </ion-item>
       </ion-col>
@@ -52,19 +50,19 @@
      
     </ion-item> -->
     <ion-item>
-      <ion-label position="floating">Purpose</ion-label>
+      <ion-label class="default-text">Purpose</ion-label>
       <ion-input required type="text" [(ngModel)]="req.Purpose"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Remarks</ion-label>
+      <ion-label class="default-text">Remarks</ion-label>
       <ion-input type="text" [(ngModel)]="req.Remarks"></ion-input>
     </ion-item>
-    <!-- <ion-item *ngIf="requestList.length > 1 && i != 0">
+    <ion-item *ngIf="requestList.length > 1 && i != 0">
       <ion-col size="12" class="ion-text-center">
         <ion-button expand="block" (click)="removeRequest(i)">Remove Request
         </ion-button>
       </ion-col>
-    </ion-item> -->
+    </ion-item>
 
   </ion-card>
   <div>

@@ -24,9 +24,7 @@
       <!-- <ion-card-title>Destination: {{req.Destination}}</ion-card-title> -->
       <ion-row>
         <ion-col>
-          <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;">
-            Destination: {{req.Destination}}
-          </p>
+         Destination: {{req.Destination}}
         </ion-col>
         <ion-col>
           {{req.CreatedOn}}
@@ -34,30 +32,23 @@
       </ion-row>
     </ion-card-header>
     <ion-card-content>
-      <!-- <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Request Sent Date:
-        {{req.CreatedOn}}</p> -->
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Purpose:
-        {{req.Purpose}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Start:
-        {{req.StartDate}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> End:
-        {{req.EndDate}}</p>
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"
-        *ngIf="req.Remarks != 'undefined'">
-        Remarks:
-        {{req.Remarks}}</p>
-      <p *ngIf="type == 'Poweruser'" class="default-text"
-        style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;">
-        Requested By:
-        {{req.Name}}</p>
-
-
-    </ion-card-content>
-    <div style="padding: 16px; background: #0d2c6c">
-      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700; color: white;">
-        Status: Pending</p>
-
-    </div>
+      <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Request Sent Date:
+        {{req.CreatedOn}}</p>
+          <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Purpose:
+            {{req.Purpose}}</p>
+          <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Start:
+            {{req.StartDate}}</p>
+          <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> End:
+            {{req.EndDate}}</p>
+          <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"
+            *ngIf="req.Remarks != 'undefined'">
+            Remarks:
+            {{req.Remarks}}</p>
+          <p *ngIf="type == 'Poweruser'" class="default-text"
+            style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;">
+            Requested By:
+            {{req.Name}}</p>
+          </ion-card-content>
   </ion-card>
 
 

@@ -31,6 +31,7 @@ export class AmbassadorFounderPage implements OnInit {
       //   // this.corporate.push(item);
       // }
       // console.log(val.json())
+      console.log(val.item(1))
       for (let i = 0; i < val.length; i++) {
         let item = val.item(i);
         // do something with it
