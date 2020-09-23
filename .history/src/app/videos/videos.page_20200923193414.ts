@@ -63,9 +63,7 @@ export class VideosPage implements OnInit {
     });
 
     this.apiSvc.getVideos(4, this.page).then(res => {
-      // console.log(res.json())
-      // console.log(res.json().length != 0)
-      this.canLoadMore = (res.json().length != 0)
+      console.log(res.json())
       if (this.videos.length == 0) {
         this.videos = res.json()
       }

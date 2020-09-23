@@ -28,24 +28,6 @@ export class ApiService {
   }
   /////PUT ALL API CALLS HERE/////////
 
-  getNotifications(count, page) {
-
-    // let body = new URLSearchParams();
-    // body.set('action', 'getOldsNews');
-    // body.set('count', '20');
-    // body.set('page', '1');
-    // body.set('language', 'en');
-    let body = new URLSearchParams();
-    body.set('action', 'getOldsNews');
-    body.set('count', count);
-    body.set('page', page);
-    body.set('language', 'en');
-
-    return this.http.post("http://cums.the-v.net/site.aspx",
-      body,
-      this.options).toPromise()
-
-  }
   getVideos(count, page) {
     let body = new URLSearchParams();
     body.set('action', 'Video_GetSearch');

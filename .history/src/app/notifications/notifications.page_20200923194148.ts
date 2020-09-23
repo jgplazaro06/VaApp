@@ -14,11 +14,10 @@ import { ApiService } from '../services/api.service';
 export class NotificationsPage implements OnInit {
 
 	load: any;
-	notifs: any[] = [];
+	notifs: any;
 	curTime: any;
 	options: any;
 	page: number = 0;
-	canLoadMore: boolean = true;
 	constructor(
 		private http: Http,
 		private loadCtrl: LoadingController,
@@ -41,44 +40,45 @@ export class NotificationsPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.retrieveNotifs();
+		this.correctImage();
 
 	}
 
 	retrieveNotifs() {
 		this.page += 1;
 
-		this.loadCtrl.create({
-			spinner: "crescent",
-			message: "Loading..."
-		}).then(loader => {
-			this.load = loader;
-			this.load.present();
+		// let body = `action=${encodeURIComponent("getOldsNews")}` +
+		// 	`&count=20&page=1&language=en`;
 
-			this.apiSvc.getNotifications(20, this.page).then(res => {
-				console.log(res.json())
-				this.canLoadMore = (res.json().length != 0)
-
-				if (this.notifs.length == 0) {
-					this.notifs = res.json()
-				}
-				else {
-					this.notifs = this.notifs.concat(res.json())
-				}
-
-				loader.dismiss()
-			}, err => {
-				console.log(err)
-				loader.dismiss()
-
-			})
+		// let body = new URLSearchParams();
+		// body.set('action', 'getOldsNews');
+		// body.set('count', '20');
+		// body.set('page', '1');
+		// body.set('language', 'en');
 
 
-		});
+		this.apiSvc.getNotifications('20', this.page).then(res => {
+			if (this.notifs.length == 0) {
+				this.notifs = res.json()
+			}
+			else {
+				this.notifs = this.notifs.concat(res.json())
+			}
+		}, err => {
+			console.log(err)
+		})
 
-
-
-
+		// return this.http.post("http://cums.the-v.net/site.aspx",
+		// 	body,
+		// 	this.options).toPromise()
+		// 	.then(
+		// 		res => {
+		// 			this.notifs = res.json();
+		// 		},
+		// 		err => {
+		// 			console.log(err);
+		// 		}
+		// 	);
 	}
 
 	viewNotif(notifs) {
@@ -100,7 +100,42 @@ export class NotificationsPage implements OnInit {
 			return Math.floor(toRet / 24) + "d ago";
 	}
 
+	async correctImage() {
+		this.loadCtrl.create({
+			spinner: "crescent",
+			message: "Loading..."
+		}).then(loader => {
+			this.load = loader;
+			this.load.present();
+		});
 
+		await this.retrieveNotifs()
+		//NATIVE BEFORE
+		// .then(() => {
+		// 	this.notifs.forEach(item => {
+		// 		console.log(item)
+		// 		//BAD THING HERE
+		// 		item.ImageLink = item.ImageLink.replace('https://', 'http://')
+		// 		let reader = new FileReader();
+		// 		this.nativeHttp.sendRequest(item.ImageLink, { method: 'get', responseType: 'blob', data: {}, headers: {} })
+		// 			.then(result => {
+		// 				let data;
+		// 				reader.readAsDataURL(result.data);
+		// 				reader.onloadend = () => {
+		// 					data = reader.result
+		// 					// data = "data:image/jpeg;base64," + data;
+		// 					item.ImageLink = data
+		// 					item.ImageLink = this.sanitizer.bypassSecurityTrustResourceUrl(item.ImageLink)
+
+		// 				}
+		// 			}, error => {
+		// 				console.log(error)
+		// 			})
+		// 	})
+		// });
+		this.load.dismiss();
+
+	}
 }
 
 

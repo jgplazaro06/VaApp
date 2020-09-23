@@ -41,23 +41,23 @@ export class AmbassadorProfilePage implements OnInit {
           else if (this.ambassador['imgUrl'].includes('http://the-v.net')) this.ambassador['imgUrl'] = this.ambassador['imgUrl'].replace('http://the-v.net', 'http://site.the-v.net')
 
 
+          let reader = new FileReader();
           //NATIVE BEFORE
-          // let reader = new FileReader();
-          // this.nativeHttp.sendRequest(this.ambassador['imgUrl'], { method: 'get', responseType: 'blob', data: {}, headers: {} })
-          //   .then(result => {
-          //     let data;
-          //     reader.readAsDataURL(result.data);
-          //     reader.onloadend = () => {
-          //       data = reader.result
-          //       // data = "data:image/jpeg;base64," + data;
-          //       // this.ambassador['imgUrl'] = data
-          //       this.ambassador['imgUrl'] = this.sanitizer.bypassSecurityTrustResourceUrl(data)
+        //   this.nativeHttp.sendRequest(this.ambassador['imgUrl'], { method: 'get', responseType: 'blob', data: {}, headers: {} })
+        //     .then(result => {
+        //       let data;
+        //       reader.readAsDataURL(result.data);
+        //       reader.onloadend = () => {
+        //         data = reader.result
+        //         // data = "data:image/jpeg;base64," + data;
+        //         // this.ambassador['imgUrl'] = data
+        //         this.ambassador['imgUrl'] = this.sanitizer.bypassSecurityTrustResourceUrl(data)
 
-          //     }
-          //   }, error => {
-          //     console.log(error)
-          //   })
-        }
+        //       }
+        //     }, error => {
+        //       console.log(error)
+        //     })
+        // }
        
         // this.sqlSvc.getAmbassadorsData({ id: this.ambassador.ID }).then(val => {
         //   console.log(val)
