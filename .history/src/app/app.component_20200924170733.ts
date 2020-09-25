@@ -173,7 +173,10 @@ export class AppComponent {
 	}
 
 	async initSqlData() {
-
+		await this.sqlSvc.getCorporateHeaders().then(res => {
+			// console.log(res.json())
+			console.log(res)
+		})
 		await this.sqlSvc.getAmbassadorsData().then(async res => {
 			if (res.length == 0) {
 				// console.log('NOT EMPTY' + res.length)
@@ -191,7 +194,7 @@ export class AppComponent {
 		});
 
 
-	
+
 
 		// if (holder.length == 0) {
 		// 	//load from api then save to sqlite

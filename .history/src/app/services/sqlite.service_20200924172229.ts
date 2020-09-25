@@ -84,7 +84,6 @@ export class SqliteService {
   }
 
   insertCorp(corp: Corporate) {
-    console.log(corp)
     this.prepareCorporateTable().then(db => {
       db.executeSql(`INSERT INTO Corporate VALUES(
         '${corp.ID}',
@@ -97,9 +96,7 @@ export class SqliteService {
         '${corp.Department}',
         '${corp.Region}',
         '${corp.Image}'
-      )`, []).then(() => { }, error => console.log(error));
-    }, error => {
-      console.log(error)
+      )`, []);
     });
   }
 
@@ -126,20 +123,18 @@ export class SqliteService {
     const db = await this.prepareCorporateTable();
     let data
     data = await db.executeSql(`Select * from Corporate
-    WHERE Department NOT IN ('NSE', 'GLAD', 'GBD', 'CL')
-    Order by case
-    when Department='ACEO' then 0
-    when Department='ED' then 1
-    when Department='CMRO' then 2 
-    when Email='agatha@the-v.net' then 3 END`
-      , [])
+    WHERE Department NOT IN 'NSE'`
+    // Order by case
+    // when Department='ACEO' then 0
+    // when Department='ED' then 1
+    // when Department='CMRO' then 2 END`
+    , [])
     return data.rows
   }
   async getCorporatesData() {
     const db = await this.prepareCorporateTable();
     let data
     data = await db.executeSql('Select * from Corporate', [])
-    console.log(data.rows)
     return data.rows;
   }
 

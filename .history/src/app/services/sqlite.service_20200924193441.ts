@@ -84,7 +84,6 @@ export class SqliteService {
   }
 
   insertCorp(corp: Corporate) {
-    console.log(corp)
     this.prepareCorporateTable().then(db => {
       db.executeSql(`INSERT INTO Corporate VALUES(
         '${corp.ID}',
@@ -130,8 +129,7 @@ export class SqliteService {
     Order by case
     when Department='ACEO' then 0
     when Department='ED' then 1
-    when Department='CMRO' then 2 
-    when Email='agatha@the-v.net' then 3 END`
+    when Department='CMRO' then 2 END`
       , [])
     return data.rows
   }

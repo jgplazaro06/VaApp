@@ -34,12 +34,8 @@
     </ion-card-header>
     <br />
     <div style="padding: 16px; background: #0d2c6c" (click)="informationToggle = !informationToggle">
-      <ion-item class="item-headers">
-        <p style="color: white;">Information </p>
-        <ion-icon style="color: white; font-size: 24px;" slot="end"
-          [name]="informationToggle ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
-        <!-- <ion-button horizontal="end">Save Changes</ion-button> -->
-      </ion-item>
+      <p style="color: white;">Information: </p>
+      <!-- <ion-button horizontal="end">Save Changes</ion-button> -->
     </div>
     <ion-list lines="none" *ngIf="informationToggle">
       <ion-item class="transparent-item">
@@ -76,10 +72,9 @@
 
   <ion-card>
     <div style="padding: 16px; background: #0d2c6c" (click)="earningsToggle = !earningsToggle">
-      <ion-item class="item-headers">
-        <p style="color: white;">Earnings </p>
-        <ion-icon style="color: white; font-size: 24px;" slot="end"
-          [name]="earningsToggle ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+      <ion-item>
+        <p style="color: white;">Earnings: </p>
+        <ion-icon slot="end" [name]="earningsToggle ? 'arrow-dropdown' : 'arrow-dropup'"></ion-icon>
         <!-- <ion-button horizontal="end">Save Changes</ion-button> -->
       </ion-item>
     </div>

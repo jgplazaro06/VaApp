@@ -173,8 +173,8 @@ export class AppComponent {
 	}
 
 	async initSqlData() {
-
 		await this.sqlSvc.getAmbassadorsData().then(async res => {
+			console.log(res.json())
 			if (res.length == 0) {
 				// console.log('NOT EMPTY' + res.length)
 				await this.apiSvc.getAllAmbassadors();
@@ -182,6 +182,7 @@ export class AppComponent {
 
 			await this.sqlSvc.getCorporatesData().then(async res => {
 				// console.log('NOT EMPTY' + res.length)
+				console.log(res.json())
 				if (res.length == 0) {
 					await this.apiSvc.getAllCorp();
 				}
@@ -190,8 +191,11 @@ export class AppComponent {
 			});
 		});
 
+		await this.sqlSvc.getCorporateHeaders().then(res => {
+			console.log(res.json())
+			console.log(res)
+		})
 
-	
 
 		// if (holder.length == 0) {
 		// 	//load from api then save to sqlite

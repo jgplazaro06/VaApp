@@ -53,18 +53,15 @@
 
 
     </ion-card-content>
-    <div style="background: #0d2c6c">
+    <div style="padding: 16px; background: #0d2c6c">
       <ion-item class="status-select">
         <ion-label style="color: white;">Status: </ion-label>
-        <ion-select placeholder="Select One" 
-        style="color:white" (ionChange)='selectChange($event)' (disabled)="canChangeStatus">
-          <ion-select-option value="On-going">On-going</ion-select-option>
-          <ion-select-option value="Rejected">Rejected</ion-select-option>
-          <ion-select-option value="Approved">Approved</ion-select-option>
-
+        <ion-select placeholder="Select One">
+          <ion-select-option value="f">Female</ion-select-option>
+          <ion-select-option value="m">Male</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- <ion-button horizontal="end">Save Changes</ion-button> -->
+      <ion-button horizontal="end">Save Changes</ion-button>
     </div>
   </ion-card>
 

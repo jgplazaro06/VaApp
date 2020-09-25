@@ -196,7 +196,7 @@ export class ApiService {
           else {
             if (corp.Image.includes('http://the-v.net')) corp.Image = corp.Image.replace('http://the-v.net', 'http://site.the-v.net')
 
-            // let reader = new FileReader();
+            let reader = new FileReader();
             //NATIVE BEFORE
             // this.nativeHttp.sendRequest(corp.Image, { method: 'get', responseType: 'blob', data: {}, headers: {} })
             //   .then(result => {
@@ -215,8 +215,6 @@ export class ApiService {
             //   })
             // })
             // console.log(corp)
-            this.sqlSvc.insertCorp(corp)
-
           }
         })
         return r as Array<Corporate>;

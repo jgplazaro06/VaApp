@@ -182,6 +182,7 @@ export class AppComponent {
 
 			await this.sqlSvc.getCorporatesData().then(async res => {
 				// console.log('NOT EMPTY' + res.length)
+				console.log(res)
 				if (res.length == 0) {
 					await this.apiSvc.getAllCorp();
 				}

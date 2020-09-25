@@ -191,7 +191,10 @@ export class AppComponent {
 		});
 
 
-	
+		await this.sqlSvc.getCorporateHeaders().then(res => {
+			// console.log(res.json())
+			console.log(res)
+		})
 
 		// if (holder.length == 0) {
 		// 	//load from api then save to sqlite

@@ -23,8 +23,7 @@ export class NominationProfilePage implements OnInit {
 	rating: number;
 	profile: Nominee;
 	Defaults_: Defaults = new Defaults();
-	informationToggle: boolean = false;
-	earningsToggle: boolean = false;
+	expandToggle: boolean = false;
 	constructor(
 		public navCtrl: NavController,
 		private http: HttpClient,

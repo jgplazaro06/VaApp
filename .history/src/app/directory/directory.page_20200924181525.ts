@@ -70,15 +70,15 @@ export class DirectoryPage implements OnInit {
       message: "Loading..."
     });
     await loader.present();
-    // let ambHolder = await this.sqlSvc.getAmbassadorByEmail('devjohl@hotmail.com');
-    // ambHolder.item(0).Department = 'ACEO'
-    // ambHolder.item(0).Name = ambHolder.item(0).name
-    // ambHolder.item(0).Email = ambHolder.item(0).email
-    // ambHolder.item(0).ContactNumber = ambHolder.item(0).contactnum
-    // ambHolder.item(0).Region = ''
-    // ambHolder.item(0).Image = ambHolder.item(0).imgUrl
+    let ambHolder = await this.sqlSvc.getAmbassadorByEmail('devjohl@hotmail.com');
+    ambHolder.item(0).Department = 'ACEO'
+    ambHolder.item(0).Name = ambHolder.item(0).name
+    ambHolder.item(0).Email = ambHolder.item(0).email
+    ambHolder.item(0).ContactNumber = ambHolder.item(0).contactnum
+    ambHolder.item(0).Region = ''
+    ambHolder.item(0).Image = ambHolder.item(0).imgUrl
 
-    // this.topTable.push(ambHolder.item(0))
+    this.topTable.push(ambHolder.item(0))
 
     // let holder = await this.sqlSvc.getCorporatesData();
     // console.log(holder)
@@ -90,15 +90,15 @@ export class DirectoryPage implements OnInit {
     await this.sqlSvc.getCorporatesData().then(async res => {
       // console.log('NOT EMPTY' + res.length)
       console.log(res)
-      if (res.length > 0) {
+      if (res.length == 0) {
         for (let i = 0; i < res.length; i++) {
           let item = res.item(i);
           // do something with it
-          // if (item.Email == "david.sharma@the-v.net" ||
-          //   item.Email == "srikanth@the-v.net" ||
-          //   item.Email == "venujohl@the-v.net") {
-          //   this.topTable.push(item)
-          // }
+          if (item.Email == "david.sharma@the-v.net" ||
+            item.Email == "srikanth@the-v.net" ||
+            item.Email == "venujohl@the-v.net") {
+            this.topTable.push(item)
+          }
           this.corporate.push(item);
           // }
           // this.corporate = holder;
@@ -109,15 +109,7 @@ export class DirectoryPage implements OnInit {
 
     await this.sqlSvc.getCorporateHeaders().then(res => {
       // console.log(res.json())
-      console.log(res)
-      for (let i = 0; i < res.length; i++) {
-        let item = res.item(i);
-  
-        this.topTable.push(item)
-        // }
-        // this.corporate = holder;
-      }
-   
+      this.topTable.push(res.item(0))
     })
 
     await loader.dismiss();

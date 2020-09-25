@@ -56,9 +56,6 @@ export class TravelRequestPage implements OnInit {
       if (this.user.Type == 'Poweruser') {
         this.canChangeStatus = true;
       }
-      if (this.user.hasOwnProperty('Department') && this.requests.length != 0) {
-        this.canChangeStatus = true
-      }
     });
 
 

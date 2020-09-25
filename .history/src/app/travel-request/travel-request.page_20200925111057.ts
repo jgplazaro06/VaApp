@@ -18,14 +18,13 @@ export class TravelRequestPage implements OnInit {
   load: any;
   user;
   type;
-  canChangeStatus: boolean = false;
+
   constructor(public navCtrl: NavController,
     private http: Http,
     private loadCtrl: LoadingController,
     private apiSvc: ApiService,
     private aroute: ActivatedRoute,
     private router: Router,
-    private alrtCtrl: AlertController,
     private authenticationService: AuthenticationService) {
 
     this.options = new RequestOptions({
@@ -52,13 +51,6 @@ export class TravelRequestPage implements OnInit {
       this.type = this.user.Type;
       this.retrieveRequests();
 
-      this.canChangeStatus = (!this.user.Class)
-      if (this.user.Type == 'Poweruser') {
-        this.canChangeStatus = true;
-      }
-      if (this.user.hasOwnProperty('Department') && this.requests.length != 0) {
-        this.canChangeStatus = true
-      }
     });
 
 
@@ -112,21 +104,7 @@ export class TravelRequestPage implements OnInit {
     this.router.navigate(['/single-travel-request'], navParams);
   }
 
-  selectChange(event) {
-    this.alrtCtrl.create({
-      header: "Change Status",
-      subHeader: "Confirm Status Change?",
-      buttons: [
-        {
-          text: "No"
-        },
-        {
-          text: "Yes",
-          handler: () => {
-            console.log('yes')
-          }
-        }
-      ]
-    }).then(alert => alert.present());
+  selectChange(event){
+    console.log(event)
   }
 }
