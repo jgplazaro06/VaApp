@@ -47,6 +47,7 @@ const routes: Routes = [
   { path: 'directory', loadChildren: './directory/directory.module#DirectoryPageModule' },
   { path: 'pdf-votes', loadChildren: './pdf-votes/pdf-votes.module#PdfVotesPageModule', canActivate: [AuthGuardService] },
   { path: 'nomination-history-profile', loadChildren: './nomination-history-profile/nomination-history-profile.module#NominationHistoryProfilePageModule' },
+  { path: 'nomination-history-holder', loadChildren: './nomination-history-holder/nomination-history-holder.module#NominationHistoryHolderPageModule' },
 ];
 
 @NgModule({
