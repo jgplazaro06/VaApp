@@ -15,7 +15,10 @@ export class Nominee {
 	public LEarnings: string;
 	public MEarnings: string;
 	public HEarnings: string;
-    public Remarks: string;
+	public Remarks: string;
+	public COVMember:string;
+	public rank: string;
+	public YearVC: string;
     
     constructor () {
 
@@ -28,8 +31,8 @@ export class Nominee {
 		this.Name = data.Name;
 		this.IRID = data.IRID;
 		this.Team = data.Team;
-		this.DateJoined = data.DateJoining;
-		this.Gender = data.Gender;
+		this.DateJoined = new Date(data.DateJoining).getFullYear().toString();
+		this.Gender = data.Gender ==='M'? 'Male':'Famale';
 		this.Country = data.Country;
 		this.ISB = data.ISBGraduate;
 		this.Supporter = data.SupportedBy;
@@ -39,5 +42,8 @@ export class Nominee {
 		this.MEarnings = data.MEarnings;
 		this.HEarnings = data.HEarnings;
 		this.Remarks = data.Remarks;
+		this.COVMember = data.COVMember;
+		this.rank = data.rank;
+		this.YearVC = data.YearVC;
 	}
 }

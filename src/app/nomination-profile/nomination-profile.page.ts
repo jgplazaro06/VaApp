@@ -8,6 +8,7 @@ import { Nominee } from '../../models/nominee.model';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class NominationProfilePage implements OnInit {
 		private storage: Storage,
 		private alertCtrl: AlertController,
 		private aroute: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private authSvc:AuthenticationService
 	) {
 		this.aroute.queryParams.subscribe(params => {
 			if (this.router.getCurrentNavigation().extras.state) {
@@ -40,8 +42,9 @@ export class NominationProfilePage implements OnInit {
 		})
 		this.rating = 1;
 
-		this.storage.get("user")
+		this.authSvc.getUser()
 			.then((val: User) => {
+				console.log(val);
 				if (!val.Class) {
 					this.voter = true;
 					this.userID = val.ID;
@@ -74,7 +77,10 @@ export class NominationProfilePage implements OnInit {
 				err => this.messagePrompt("Error", "Something went wrong")
 			);
 	}
-
+	onRate(rate) {
+		console.log(rate)
+		this.rating = rate;
+	  }
 	messagePrompt(head: string, message: string) {
 		this.alertCtrl.create({
 			header: head,
@@ -86,7 +92,7 @@ export class NominationProfilePage implements OnInit {
 	paymentYear(): string {
 		let curDate: number = new Date().getFullYear();
 
-		return `from April ${curDate - 1} to March ${curDate}`;
+		return `From April ${curDate - 1} to March ${curDate}`;
 	}
 
 	beforeSaving() {

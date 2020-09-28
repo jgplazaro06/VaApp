@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController } from '@ionic/angular';
-import { HttpModule, Http, RequestOptions, Headers, URLSearchParams } from '@angular/http'
+import { HttpModule, Http, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 import { Defaults } from '../objects';
 import { Nominee } from '../../models/nominee.model';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
@@ -16,7 +16,7 @@ export class NominationsPage implements OnInit {
 	vcs: Array<Nominee> = new Array<Nominee>();
 	load: any;
 	Defaults_: Defaults = new Defaults();
-	category: Array<{ name: string, value: Array<Nominee> }>;
+	//category: Array<{ name: string, value: Array<Nominee> }>;
 	options: any;
 
 	constructor(
@@ -31,99 +31,28 @@ export class NominationsPage implements OnInit {
 		});
 
 
-		this.retrieveNominees();
-		this.category = [
-			{ name: "AVPs", value: this.avps },
-			{ name: "VCs", value: this.vcs }
-		];
+		//this.retrieveNominees();
+		// this.category = [
+		// 	{ name: "AVPs", value: this.avps },
+		// 	{ name: "VCs", value: this.vcs }
+		// ];
 	}
 
 	ngOnInit() {
 
 	}
 
-	retrieveNominees() {
-		this.loadCtrl.create({
-			spinner: "crescent",
-			message: "Loading..."
-		}).then(loader => {
-			loader.present()
-			this.load = loader;
-		});
+	
 
-		// let body = `action=${encodeURIComponent("Nomination_ShowCandidates")}` +
-		// 	`&title=${encodeURIComponent("AVP")}`;
+	selectedCategory(type) {
 
-		let body = new URLSearchParams();
-		body.set('action', 'Nomination_ShowCandidates');
-		body.set('title', 'AVP');
-
-		this.http.post("http://vaservice.the-v.net/site.aspx",
-			body,
-			this.options)
-			.subscribe(
-				res => {
-					let result = res.json();
-					for (let element in result) {
-						let holder: Nominee = new Nominee();
-						holder.fromJson(result[element])
-
-						this.avps.push(holder);
-						console.log(this.avps)
-					}
-					console.log(this.avps)
-				},
-				err => {
-					console.log(err);
-				}
-			);
-
-		// body = `action=${encodeURIComponent("Nomination_ShowCandidates")}` +
-		// 	`&title=${encodeURIComponent("VC")}`;
-		body = new URLSearchParams();
-		body.set('action', 'Nomination_ShowCandidates');
-		body.set('title', 'VC');
-
-		this.http.post("http://vaservice.the-v.net/site.aspx",
-			body,
-			this.options)
-			.subscribe(
-				res => {
-					let result = res.json()
-					for (let element in result) {
-						let holder: Nominee = new Nominee();
-						holder.fromJson(result[element]);
-
-						this.vcs.push(holder);
-						console.log(this.vcs)
-
-					}
-					// res.forEach(element => {
-					// 	let holder: Nominee = new Nominee();
-					// 	holder.fromJson(element);
-
-					// 	this.vcs.push(holder);
-					// });
-
-					this.load.dismiss();
-				},
-				err => {
-					console.log(err);
-					this.load.dismiss();
-				}
-			);
-	}
-
-	selectedCategory(content: { name: string, value: Array<Nominee> }) {
-
-		console.log(content)
-		console.log(content.value)
-		console.log(content.name)
+		// console.log(content)
+		// console.log(content.value)
+		// console.log(content.name)
 
 		let navParams: NavigationExtras = {
 			state: {
-				data: content.value,
-				category: content.name
+				category: type
 			}
 		}
 		this.navCtrl.navigateForward(['/nominee-category-holder'], navParams);

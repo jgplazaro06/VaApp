@@ -62,7 +62,7 @@ export class HomePage {
           } else if (user.Class && user.Type === 'Poweruser') {
             this.travelRequestAdmin = true;
           }
-          if (user.Type === 'Poweruser' || user.Type === 'V Partner') {
+          if (user.Type === 'Poweruser' || user.Type === 'V PARTNERS') {
             this.hasNominationAccess = true;
           }
           else {
@@ -114,6 +114,13 @@ export class HomePage {
         buttons: ["OK"]
       }).then(alert => alert.present());
     }
+  }
+  accessDenied(){
+    this.alertCtrl.create({
+      header: "Access Denied!",
+      subHeader: "Your account does not have the permission to access this part of the app. Please contact the admin for more information.",
+      buttons: ["OK"]
+    }).then(alert => alert.present());
   }
 
 }

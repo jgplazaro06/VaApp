@@ -108,8 +108,7 @@
           [routerLink]="['/nominations']" routerDirection='forward'>
           <img src="assets/imgs/icn-nomination.png">
         </ion-button>
-        <ion-button size="large" class="home-buttons default-element-color" [routerLink]="['/nomination-history']"
-          routerDirection='forward' *ngIf="!hasNominationAccess">
+        <ion-button size="large" class="home-buttons default-element-color" (click)="accessDenied()" *ngIf="!hasNominationAccess">
           <img src="assets/imgs/icn-nomination.png">
         </ion-button>
         <p class="small-text" style="padding: 0px;">VA NOMINATION</p>
