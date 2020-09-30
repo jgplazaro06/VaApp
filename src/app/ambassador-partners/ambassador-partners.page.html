@@ -20,13 +20,13 @@
           <ion-row>
             <ion-col>
               <ion-card-header>
-                <ion-card-title class="card--title" style="color:white;">{{a.name}}</ion-card-title>
+                <ion-card-title class="card--title" style="color:white;">{{a.Name}}</ion-card-title>
                 <ion-card-subtitle class="card--subtitle" style="color:#E3D4B9; margin-top: 0px;">{{a.Position}}
                 </ion-card-subtitle>
               </ion-card-header>
             </ion-col>
             <ion-col style="padding-right: 0px; padding-top: 0px; padding-bottom: 0px; padding-left: 0px;">
-              <img [src]="a.imgUrl" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)" style="height:100%"  />
+              <img [src]="a.Image" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)" style="height:100%"  />
             </ion-col>
           </ion-row>
         </ion-card>

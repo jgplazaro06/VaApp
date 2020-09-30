@@ -64,7 +64,7 @@ export class AmbassadorProfilePage implements OnInit {
         // this.ambassador = val[0];
         console.log(this.ambassador)
 
-        switch (this.ambassador.title) {
+        switch (this.ambassador.Title) {
           case 'VF':
             this.isFounder = true;
             if (this.ambassador.Rank == '1') this.ambassador.Image = '../../assets/dataprof.png'

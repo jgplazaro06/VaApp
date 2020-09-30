@@ -20,9 +20,6 @@ export class NominationHistoryHolderPage implements OnInit {
 
 
   selectedCategory(cat) {
-
-
-
     let navParams: NavigationExtras = {
       state: {
         data: cat,

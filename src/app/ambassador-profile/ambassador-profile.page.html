@@ -48,23 +48,23 @@
 </ion-header>
 <ion-content class="gradient-background">
   <ion-card style="background: #E3E5E6;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;">
-    <img *ngIf="!isFounder" [src]="ambassador.imgUrl" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)"
+    <img *ngIf="!isFounder" [src]="ambassador.Image" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)"
       style="margin:auto; width: 100%;" />
     <!-- </ion-img> -->
     <ion-card-header *ngIf="isPartner">
       <ion-card-title class="default-text" style="text-align: center; font-weight: 900; ">
-        {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}
+        {{ambassador.Name != "" ? ambassador.Name : 'Unavailable'}}
       </ion-card-title>
     </ion-card-header>
     <ion-card-content *ngIf="isPartner">
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
-        {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}</p>
+        {{ambassador.Position != "" ? ambassador.Position : 'Unavailable'}}</p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> IRID:
-        {{ambassador.irid != "" ? ambassador.irid : 'Unavailable'}}</p>
+        {{ambassador.IRID != "" ? ambassador.IRID : 'Unavailable'}}</p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
-        {{ambassador.email != "" ? ambassador.email : 'Unavailable'}}</p>
+        {{ambassador.Email != "" ? ambassador.Email : 'Unavailable'}}</p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
-        Number: {{ambassador.contactnum != "" ? ambassador.contactnum : 'Unavailable'}}</p>
+        Number: {{ambassador.Contact != "" ? ambassador.Contact : 'Unavailable'}}</p>
     </ion-card-content>
   </ion-card>
   <!-- <img [src]="assets/imgs/profile-photos-dato"> -->
@@ -85,22 +85,22 @@
           {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}</p>
       </ion-card-content> -->
     </ion-card>
-    <div [innerHtml]="ambassador.NewDescription" style="padding: 40px; text-align: left; color: #042F66;"></div>
+    <div [innerHtml]="ambassador.Description" style="padding: 40px; text-align: left; color: #042F66;"></div>
   </div>
 
   <div *ngIf="isPartner">
-    <div [innerHtml]="ambassador.NewDescription" style="padding: 40px; text-align: left; color: #042F66"></div>
+    <div [innerHtml]="ambassador.Description" style="padding: 40px; text-align: left; color: #042F66"></div>
   </div>
 
   <div *ngIf="isAssociatePartner || isCouncil">
     <ion-card-content>
       <p style="text-align: center; font-weight: 900; font-weight: 700; font-size: 20px" class="default-text">
-        {{ambassador.name != "" ? ambassador.name : 'Unavailable'}}</p>
+        {{ambassador.Name != "" ? ambassador.Name : 'Unavailable'}}</p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Title:
-        {{ambassador.position != "" ? ambassador.position : 'Unavailable'}}
+        {{ambassador.Position != "" ? ambassador.Position : 'Unavailable'}}
       </p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Team:
-        {{ambassador.team != "" ? ambassador.team : 'Unavailable'}}
+        {{ambassador.Team != "" ? ambassador.Team : 'Unavailable'}}
       </p>
       <!-- <div>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Based
@@ -111,10 +111,10 @@
         Joined:</p>
     </div> -->
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Email:
-        {{ambassador.email != "" ? ambassador.email : 'Unavailable'}}
+        {{ambassador.Email != "" ? ambassador.Email : 'Unavailable'}}
       </p>
       <p class="default-text" style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;"> Contact
-        Number: {{ambassador.contactnum != "" ? ambassador.contactnum : 'Unavailable'}}</p>
+        Number: {{ambassador.Contact != "" ? ambassador.Contact : 'Unavailable'}}</p>
     </ion-card-content>
   </div>
 

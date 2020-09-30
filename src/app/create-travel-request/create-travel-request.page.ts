@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common'
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiService } from '../services/api.service';
 
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
 	selector: 'app-create-travel-request',
@@ -84,24 +86,35 @@ export class CreateTravelRequestPage implements OnInit {
 
 	}
 
-	postForm() {
-
-
+	 postForm() {
+		let copy = [...this.requestList];
+		
 		for (let i = 0; i < this.requestList.length; i++) {
 			// let request = JSON.stringify(this.requestList[i])
 
 			// let res =
 			this.apiSvc.createTravelRequest(this.requestList[i], this.user.ID).then(res => {
-				let holder = res.json();
-				if (holder == "True") {
-					this.messagePromt("Success", "Request Created");
+				let holder = res.text();
+				if (holder == "True" ) {
+					copy.splice(0,1);
+					console.log(this.requestList.length);
+					console.log(copy.length);
+					if(i==this.requestList.length-1){
+						this.messagePromt("Success", "Request Created");
+						this.cleanData(copy);
+					}
 				}
-
 				else {
 					this.messagePromt("Error", "Something went wrong");
+					i=this.requestList.length;
+					this.cleanData(copy);
 				}
+			}).catch(()=>{
+				this.messagePromt("Error", "Something went wrong");
+					i=this.requestList.length;
+					this.cleanData(copy);
 			})
-
+			
 
 			// this.http.post('http://localhost:8080/travelRequest', { data: body }, this.options).subscribe(res => {
 			// 	console.log(res)
@@ -109,8 +122,21 @@ export class CreateTravelRequestPage implements OnInit {
 			// 	console.log(error)
 			// })
 		}
-
-
+		
+	}
+	cleanData(copy){
+		console.log(copy.length>0);
+		if(copy.length>0){
+			this.requestList = [...copy];
+		}
+		else {
+			//reset
+			let t = new TravelRequest();
+			this.requestList = [];
+			this.requestList.push(t);
+			console.log(this.requestList);
+			//this.requestList.push(this.data);
+		}
 	}
 
 	async checkFields() {

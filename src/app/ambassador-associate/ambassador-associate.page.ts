@@ -43,10 +43,11 @@ export class AmbassadorAssociatePage implements OnInit {
         //   this.avps.push(item);
         // }
         for (let i = 0; i < val.length; i++) {
-          let item = val.item(i);
-          // do something with it
+          let a = new Ambassador();
+          a.fromJson(val.item(i));
+
     
-          this.avps.push(item);
+          this.avps.push(a);
           // }
           // this.corporate = holder;
         }

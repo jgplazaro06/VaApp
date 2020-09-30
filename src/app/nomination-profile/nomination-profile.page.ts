@@ -141,6 +141,7 @@ export class NominationProfilePage implements OnInit {
 
 					if (res == "True") {
 						this.messagePrompt("Success", "Vote Successful");
+						this.canVote = false;
 					}
 
 					else {

@@ -37,9 +37,9 @@
   </ion-segment> -->
 
   <div>
-    <ion-item *ngFor="let person of viewList" class="transparent-item" (click)="viewProfile(person)" text-wrap>
+    <ion-item *ngFor="let person of nominees" class="transparent-item" (click)="viewProfile(person)" text-wrap>
       <ion-thumbnail slot="start">
-        <img [src]="person.Image" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)">
+        <img src="http://vaservice.the-v.net/ImageData.ashx?id={{person.CandidateID}}" (error)="Defaults_.PERSON_REVERT_TO_DEFAULT($event)">
       </ion-thumbnail>
       <p class="default-text">{{ person.Name }}</p>
     </ion-item>

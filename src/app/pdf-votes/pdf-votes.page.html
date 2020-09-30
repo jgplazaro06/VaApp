@@ -10,8 +10,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-header>
-  <ion-toolbar class="lower-toolbar" [routerLink]="['/home']" routerDirection="back">
-    &nbsp; &nbsp; < Tally Votes </ion-toolbar>
+  <ion-toolbar class="lower-toolbar" [routerLink]="['/nomination-history-holder']" routerDirection="back">
+    &nbsp; &nbsp; < {{category}} Nomination History </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -34,17 +34,17 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
+    
       <ion-button *ngIf="selectedMonth" expand="full" id="btnGetVotes" class="default-element-color"
-        (click)="listVotes()">
+        (click)="getData('list')">
         List Votes
       </ion-button>
 
       <ion-button *ngIf="selectedMonth" expand="full" id="btnGetVotes" class="default-element-color"
-        (click)="generatePDF()">
+        (click)="getData('pdf')">
         Export PDF
       </ion-button>
-    </ion-item>
+   
   </div>
 
 

@@ -49,7 +49,7 @@ export class ApiService {
 
         // console.log(res.json())
         // if (res[0]['Data'] == 'false' || res[0]['Info'] == 'action is null' || res[0].length === 0) {
-        return res
+        return res.text();
       },
       (err) => {
         return 'error';

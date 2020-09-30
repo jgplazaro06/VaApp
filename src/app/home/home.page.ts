@@ -62,7 +62,7 @@ export class HomePage {
           } else if (user.Class && user.Type === 'Poweruser') {
             this.travelRequestAdmin = true;
           }
-          if (user.Type === 'Poweruser' || user.Type === 'V Partner') {
+          if (user.Type === 'Poweruser' || user.Type === 'V PARTNERS') {
             this.hasNominationAccess = true;
           }
           else {

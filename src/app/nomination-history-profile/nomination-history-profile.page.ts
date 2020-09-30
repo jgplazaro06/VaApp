@@ -39,16 +39,16 @@ export class NominationHistoryProfilePage implements OnInit {
         // delete holder['Total']
 
 
-        Object.keys(this.profile).forEach((key) => (this.profile[key] == "") && delete this.profile[key]);
+        Object.keys(this.profile).forEach((key) => (this.profile[key] == "" && key!="Total") && delete this.profile[key]);
         this.votes = Object.entries(this.profile)
-        this.votes = this.votes.slice(4, (this.votes.length - 2))
+        this.votes = this.votes.slice(4, (this.votes.length - 1))
 
         // let holder = this.votes;
         // delete holder.CandidateID
         // delete holder.IRID
         // delete holder.Name
         // delete holder.Team
-
+        console.log(Object.entries(this.profile));
         console.log(this.votes)
       }
     })

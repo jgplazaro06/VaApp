@@ -20,6 +20,7 @@ export class AmbassadorFounderPage implements OnInit {
 
   ngOnInit() {
     this.sqlSvc.getAmbassadorsData({ title: 'VF' }).then(val => {
+      
       // for (let i = 0; i < val.length; i++) {
       //   let item = val.item(i);
       //   // do something with it
@@ -33,16 +34,18 @@ export class AmbassadorFounderPage implements OnInit {
       // console.log(val.json())
       for (let i = 0; i < val.length; i++) {
         let item = val.item(i);
+        let a= new Ambassador();
+        a.fromJson(val.item(i)); 
         // do something with it
 
         // this.corporate.push(item);
         // }
         // this.corporate = holder;
         if (val.item(i).Rank == '1') {
-          this.dato = val.item(i)
+          this.dato = a;
         }
         else if (val.item(i).Rank == '2') {
-          this.japa = val.item(i)
+          this.japa = a;
         }
       }
 

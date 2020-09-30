@@ -19,7 +19,7 @@ export class DirectoryPage implements OnInit {
   corporate: Array<Corporate> = new Array<Corporate>();
   Defaults_: Defaults = new Defaults();
   topTable: any[] = [];
-  type: 'GBD';
+  type='GBD';
   viewTable = [];
   constructor(private sqlSvc: SqliteService,
     private apiSvc: ApiService,

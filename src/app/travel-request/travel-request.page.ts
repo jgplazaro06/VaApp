@@ -133,9 +133,15 @@ export class TravelRequestPage implements OnInit {
   }
 
   updateTravelRequest(id, status) {
+    this.loadCtrl.create({
+      spinner: "crescent",
+      message: "Loading..."
+    }).then(loader => {
+      loader.present();
+    
     this.apiSvc.updateTravelStatus(this.user.Name, id, status).then(res => {
-      let result = res['_body']
-      if (res == 'error') {
+      let result = res;
+      if (result == 'error') {
         this.messagePromt("Error", "Oops! Something went wrong! Please Try again.");
 
       }
@@ -146,10 +152,10 @@ export class TravelRequestPage implements OnInit {
       else {
         this.messagePromt("Error", "Sorry! Status update failed.");
       }
-      this.load.dismiss()
+      loader.dismiss()
     })
 
-
+  });
   }
 
   messagePromt(head: string, message: string) {

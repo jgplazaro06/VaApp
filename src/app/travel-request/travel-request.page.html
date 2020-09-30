@@ -50,22 +50,22 @@
         style=" margin-top: 0px;margin-bottom: 0px; font-weight: 700;">
         Requested By:
         {{req.Name}}</p>
-
-
+      
     </ion-card-content>
-    <div style="background: #0d2c6c">
-      <ion-item class="status-select">
-        <ion-label style="color: white;">Status: </ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="req.Status" style="color:white"
-          (ionChange)='selectChange(req.ID, req.Status)' [disabled]="isStatusDisabled">
-          <ion-select-option value="Pending">Pending</ion-select-option>
-          <ion-select-option value="Rejected">Rejected</ion-select-option>
-          <ion-select-option value="Approved">Approved</ion-select-option>
-
-        </ion-select>
-      </ion-item>
+    <p style="background: #0d2c6c; color: white; padding: 15px;" *ngIf="isStatusDisabled"><strong>Status: {{req.Status}}</strong></p>
+    <ion-item class="status-select" *ngIf="!isStatusDisabled">
+      <ion-label style="color: white;">Status: </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="req.Status" style="color:white"
+        (ionChange)='selectChange(req.ID, req.Status)'>
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Rejected">Rejected</ion-select-option>
+        <ion-select-option value="Approved">Approved</ion-select-option>
+        <ion-select-option value="On-going">On-going</ion-select-option>
+        <ion-select-option value="Done">Done</ion-select-option>
+      </ion-select>
+    </ion-item>
+      
       <!-- <ion-button horizontal="end">Save Changes</ion-button> -->
-    </div>
   </ion-card>
 
 

@@ -41,18 +41,11 @@ export class NominationHistoryPage implements OnInit {
         this.year = this.router.getCurrentNavigation().extras.state.year;
         this.month = this.router.getCurrentNavigation().extras.state.month;
 
-        this.viewList = this.nominees;
-        this.getImages(this.viewList)
-        console.log(this.viewList)
+        //this.nominees;
+        //this.getImages(this.viewList)
+        //console.log(this.viewList)
         // this.changeView();
         // this.category = this.router.getCurrentNavigation().extras.state.category;
-      }
-      else {
-        console.log('else')
-        this.retrieveNominees();
-        this.viewList = this.vps;
-        this.getImages(this.viewList)
-
       }
     })
 
@@ -156,7 +149,7 @@ export class NominationHistoryPage implements OnInit {
       element.Image = 'http://vaservice.the-v.net/ImageData.ashx?id=' + element.CandidateID
     })
   }
-  viewProfile(person: Nominee) {
+  viewProfile(person) {
     let navParams: NavigationExtras = {
       state: {
         data: person,

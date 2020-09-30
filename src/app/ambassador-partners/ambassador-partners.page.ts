@@ -40,10 +40,12 @@ export class AmbassadorPartnersPage implements OnInit {
         //   return row.IRID !== '0000000';
         // });
         for (let i = 0; i < val.length; i++) {
-          let item = val.item(i);
+          let a = new Ambassador();
+          a.fromJson(val.item(i));
+
           // do something with it
 
-          this.vps.push(item);
+          this.vps.push(a);
           // }
           // this.corporate = holder;
         }
