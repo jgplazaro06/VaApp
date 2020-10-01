@@ -19,7 +19,7 @@ export class EditPowerPage implements OnInit {
   name: string;
   mainSource: any;
   disablePosition: boolean;
-  profile: Corporate = new Corporate();
+  profile: User = new User();
   holder: User = new User();
   type: string;
   constructor(
@@ -54,9 +54,9 @@ export class EditPowerPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
         console.log(this.router.getCurrentNavigation().extras.state.data)
         this.mainSource = this.router.getCurrentNavigation().extras.state.data;
-        console.log(this.mainSource.hasOwnProperty('Type'))
+        console.log(this.mainSource)
 
-        if (this.mainSource.hasOwnProperty('Type')) {
+        if (this.mainSource.Class) {
           this.type = 'Corp'
         }
         else {
@@ -138,9 +138,10 @@ export class EditPowerPage implements OnInit {
             this.holder.Email = this.profile.Email;
             this.holder.Contact = this.profile.Contact;
             this.holder.Name = this.profile.Name;
-
-            this.storage.set('user', this.holder);
-            this.authState.next(true);
+            console.log(this.holder);
+            this.storage.set('user', this.holder).then(()=>{
+              this.authenticationService.authState.next(true);
+            });
             this.navCtrl.navigateRoot(['/home'])
             // this.authenticationService.logout();
           }

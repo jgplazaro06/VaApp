@@ -97,17 +97,18 @@ export class AppComponent {
 			this.appPages = [
 				// { title: "My Profile", component: '/profile'},
 				// { title: "Home", component: '/home'},
-				{ title: "V Ambassadors", component: '/ambassadors', accesible: this.hasAccount },
+				{ title: "V Ambassadors", component: '/ambassadors', accesible: true },
 				{ title: "VA Videos", component: '/videos', accesible: true },
 				{ title: "Directory", component: '/directory', accesible: true },
 				// { title: "Corporate", component: '/corporate'},
 				{ title: "My Tools", component: '/tools', accesible: this.hasAccount },
 				{ title: "My Tavel", component: '/travel-request', accesible: this.hasAccount }
 			];
+			this.initSqlData();
 		});
 
 
-		this.initSqlData()
+		
 
 	}
 
@@ -159,7 +160,7 @@ export class AppComponent {
 		this.appPages = [
 			// { title: "My Profile", component: '/profile'},
 			// { title: "Home", component: '/home'},
-			{ title: "V Ambassadors", component: '/ambassadors', accesible: this.hasAccount },
+			{ title: "V Ambassadors", component: '/ambassadors', accesible: true},
 			{ title: "VA Videos", component: '/videos', accesible: true },
 			{ title: "Directory", component: '/directory', accesible: true },
 			// { title: "Corporate", component: '/corporate'},
@@ -168,8 +169,8 @@ export class AppComponent {
 		];
 
 		this.authenticationService.getUser().then(user => {
-			console.log(user)
-			this.user = user
+			console.log(user);
+			this.user = user;
 			console.log(this.appPages)
 			if (!user.Class) {
 				this.appPages[4].component = '/travel-request';
